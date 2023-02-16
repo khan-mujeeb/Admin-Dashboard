@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AdminDashboard"
         tools:targetApi="31">
         <activity
-            android:name=".AddBooks"
+            android:name=".ui.AddBooks"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
