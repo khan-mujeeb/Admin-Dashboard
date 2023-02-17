@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "797804986300",
+    "firebase_url": "https://study-smart-10f58-default-rtdb.firebaseio.com",
+    "project_id": "study-smart-10f58",
+    "storage_bucket": "study-smart-10f58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797804986300:android:fd3e408e427da77d5cf5b9",
+        "android_client_info": {
+          "package_name": "com.example.admindashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797804986300-c6gq4083olpuigt33hkmk2uhv9f2o135.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGssGj9Kdzi56rGecZmpY5qM80ePlIBK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797804986300-c6gq4083olpuigt33hkmk2uhv9f2o135.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
