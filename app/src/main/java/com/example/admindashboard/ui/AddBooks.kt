@@ -42,7 +42,7 @@ class AddBooks : AppCompatActivity() {
 
 
         binding!!.submit.setOnClickListener {
-            subject = binding!!.subject.text.toString()
+//            subject = binding!!.subject.text.toString()
             uploadPdfToFirebaseStorage(uriValue)
         }
 
@@ -66,10 +66,11 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun savePdfDownloadUrlToFirebaseRealtimeDatabase(downloadUrl: String) {
+        println("mujeeb $subject")
         val databaseRef = FirebaseDatabase.getInstance().getReference("books")
             .child(department)
             .child(year)
-            .child("${semester}sem")
+            .child("${semester}_sem")
             .child(subject)
         val pdfId = subject
         val pdf = Pdf(pdfId, downloadUrl)
@@ -103,7 +104,7 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun setSemViewGroup() {
-        binding!!.semesterRadioGrp.setOnCheckedChangeListener { group, checkedId ->
+        binding!!.semesterRadioGrp.setOnCheckedChangeListener { _, checkedId ->
             if (
                 checkedId == binding!!.one.id || checkedId == binding!!.two.id ||
                 checkedId == binding!!.three.id || checkedId == binding!!.four.id ||
@@ -114,7 +115,7 @@ class AddBooks : AppCompatActivity() {
                 checkSem(binding!!.three, binding!!.four, 3, 4 )
                 checkSem(binding!!.five, binding!!.six, 5, 6)
                 checkSem(binding!!.seven, binding!!.eight, 7, 8 )
-                binding!!.subject.visibility = View.VISIBLE
+//                binding!!.subject.visibility = View.VISIBLE
             }
         }
     }
@@ -126,24 +127,24 @@ class AddBooks : AppCompatActivity() {
                 binding!!.fe.id -> {
                     Toast.makeText(this, "1st year", Toast.LENGTH_SHORT).show()
                     setContent(1)
-                    year = "1st_year"
+                    year = "first_year"
                 }
 
                 binding!!.se.id -> {
                     Toast.makeText(this, "2nd year", Toast.LENGTH_SHORT).show()
                     setContent(2)
-                    year = "2nd_year"
+                    year = "second_year"
                 }
 
                 binding!!.te.id -> {
                     Toast.makeText(this, "3rd year", Toast.LENGTH_SHORT).show()
                     setContent(3)
-                    year = "3rd_year"
+                    year = "third_year"
                 }
 
                 binding!!.be.id -> {
                     Toast.makeText(this, "4th year", Toast.LENGTH_SHORT).show()
-                    year = "4th_year"
+                    year = "fourth_year"
                     setContent(4)
 
                 }
@@ -232,33 +233,87 @@ class AddBooks : AppCompatActivity() {
     private fun checkSem(one: RadioButton, two: RadioButton, i: Int, i1: Int) {
         if (one.isChecked)
 
-            semester = "$i" + setPostfixOfSemester(i)
+            semester = semNumberToWord(i)
         if(two.isChecked)
-            semester = "$i1" + setPostfixOfSemester(i1)
+            semester = semNumberToWord(i1)
     }
 
-    private fun setPostfixOfSemester(i: Int): String {
-        var suffix = ""
+    private fun semNumberToWord(i: Int): String {
+        var word = ""
         when(i) {
             1 -> {
-                suffix = "st"
+                word = "first"
+
             }
             2 -> {
-                suffix = "nd"
+                word = "second"
+
             }
 
             3 -> {
-                suffix = "rd"
-            }
+                word = "third"
 
-            else -> {
-                suffix = "th"
+
+            }
+            4 -> {
+                word = "fourth"
+
+            }
+            5 -> {
+                word = "fifth"
+
+                semFiveSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                    semFiveSubject()
+                }
+
+            }
+            6 -> {
+                word = "six"
+                semSixSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                    semSixSubject()
+                }
+
+            }
+            7 -> {
+                word = "seventh"
+            }
+            8 -> {
+                word = "eight"
             }
         }
-
-        return suffix
+        return word
     }
 
+    private fun semSixSubject() {
+        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subj5.visibility = View.INVISIBLE
+
+        setSubjectData(binding!!.subj1, "Computer Network and Security")
+        setSubjectData(binding!!.subj2, "Data Science and Big Data Analytics")
+        setSubjectData(binding!!.subj3, "Web Application Development")
+        setSubjectData(binding!!.subj4, "Elective-II")
+    }
+
+    private fun semFiveSubject() {
+        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subj5.visibility = View.VISIBLE
+        setSubjectData(binding!!.subj1, "Theory of Computation")
+        setSubjectData(binding!!.subj2, "Operating System")
+        setSubjectData(binding!!.subj3, "Machine Learning")
+        setSubjectData(binding!!.subj4, "Human Computer Interaction")
+        setSubjectData(binding!!.subj5, "Elective–I")
+    }
+
+    private fun setSubjectData(subjBtn: RadioButton, sub: String) {
+        subjBtn.text = sub
+        println("khan njsncsnc")
+        if (subjBtn.isChecked) {
+            println("khan")
+            subject = sub
+        }
+    }
 
 }
 
