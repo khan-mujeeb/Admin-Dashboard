@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +13,9 @@ import android.provider.OpenableColumns
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import com.example.admindashboard.R
 import com.example.admindashboard.data.Pdf
 import com.example.admindashboard.databinding.ActivityAddBooksBinding
 import com.google.firebase.database.FirebaseDatabase
@@ -27,6 +30,10 @@ class AddBooks : AppCompatActivity() {
 
     private var uriValue: Uri? = null
     var binding: ActivityAddBooksBinding? = null
+
+    private lateinit var dialog: AlertDialog
+
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBooksBinding.inflate(layoutInflater)
@@ -38,8 +45,11 @@ class AddBooks : AppCompatActivity() {
 
 
 
+
+
         binding!!.submit.setOnClickListener {
-//            subject = binding!!.subject.text.toString()
+
+
             uploadPdfToFirebaseStorage(uriValue)
         }
 
@@ -49,6 +59,9 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun uploadPdfToFirebaseStorage(uriValue: Uri?) {
+
+        startLoadingScreen()
+
         val storageRef = FirebaseStorage.getInstance().reference
         val pdfRef = storageRef.child("books/${uriValue!!.lastPathSegment}")
         val uploadTask = pdfRef.putFile(uriValue)
@@ -60,6 +73,14 @@ class AddBooks : AppCompatActivity() {
         }.addOnFailureListener { exception ->
             // Handle the error
         }
+    }
+
+    private fun startLoadingScreen() {
+        val builder = AlertDialog.Builder(this)
+        builder.setView(layoutInflater.inflate(R.layout.loading_screen, null))
+        builder.setCancelable(false)
+        dialog = builder.create()
+        dialog.show()
     }
 
     private fun savePdfDownloadUrlToFirebaseRealtimeDatabase(downloadUrl: String) {
@@ -74,6 +95,8 @@ class AddBooks : AppCompatActivity() {
         pdfId?.let {
             databaseRef.setValue(pdf)
         }
+        dialog.dismiss()
+        Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
     }
 
 
