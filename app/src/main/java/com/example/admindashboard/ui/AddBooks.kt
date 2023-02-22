@@ -13,13 +13,10 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import com.example.admindashboard.Pdf
+import com.example.admindashboard.data.Pdf
 import com.example.admindashboard.databinding.ActivityAddBooksBinding
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import javax.security.auth.Subject
 
 class AddBooks : AppCompatActivity() {
 
@@ -312,6 +309,14 @@ class AddBooks : AppCompatActivity() {
         if (subjBtn.isChecked) {
             println("khan")
             subject = sub
+        }
+    }
+
+    // releasing resources
+    override fun onDestroy() {
+        super.onDestroy()
+        if (binding!=null) {
+            binding = null
         }
     }
 
