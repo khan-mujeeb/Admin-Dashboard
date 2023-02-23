@@ -17,8 +17,12 @@ import androidx.core.app.ActivityCompat
 import com.example.admindashboard.R
 import com.example.admindashboard.data.Pdf
 import com.example.admindashboard.databinding.ActivityAddBooksBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import java.util.*
 
 class AddBooks : AppCompatActivity() {
 
@@ -28,15 +32,21 @@ class AddBooks : AppCompatActivity() {
     var subject: String = ""
 
     private var uriValue: Uri? = null
+    private lateinit var auth: FirebaseAuth
     var binding: ActivityAddBooksBinding? = null
 
     private lateinit var dialog: AlertDialog
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
         binding = ActivityAddBooksBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
+
+        val heading = intent.getStringExtra("heading")
+        binding!!.appbarText.text = heading
 
         setYearViewGroup()
         setSemViewGroup()
@@ -45,6 +55,7 @@ class AddBooks : AppCompatActivity() {
 
 
 
+        auth = Firebase.auth
 
         binding!!.submit.setOnClickListener {
 
@@ -82,6 +93,18 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun savePdfDownloadUrlToFirebaseRealtimeDatabase(downloadUrl: String) {
+
+        val calendar = Calendar.getInstance()
+        val currentDate = "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(
+            Calendar.YEAR)}"
+
+        val currentTime = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}:${calendar.get(
+            Calendar.SECOND)}"
+
+        val email = auth.currentUser!!.email
+        val list = email!!.split("_", "@").map { it.trim() }
+        val name = "${list[0]} ${list[1]}"
+
         val databaseRef = FirebaseDatabase.getInstance().getReference("books")
             .child(department)
             .child(year)
@@ -93,7 +116,10 @@ class AddBooks : AppCompatActivity() {
         val pdf = Pdf(
             key!!,
             pdfId,
-            downloadUrl
+            downloadUrl,
+            name,
+            currentDate,
+            currentTime
         )
 
         pdfId.let {
@@ -128,13 +154,13 @@ class AddBooks : AppCompatActivity() {
 
     private fun setSemViewGroup() {
         binding!!.semesterRadioGrp.setOnCheckedChangeListener { _, checkedId ->
+//            checkedId == binding!!.one.id || checkedId == binding!!.two.id ||
             if (
-                checkedId == binding!!.one.id || checkedId == binding!!.two.id ||
                 checkedId == binding!!.three.id || checkedId == binding!!.four.id ||
                 checkedId == binding!!.five.id || checkedId == binding!!.six.id ||
                 checkedId == binding!!.seven.id || checkedId == binding!!.eight.id
             ) {
-                checkSem(binding!!.one, binding!!.two, 1, 2)
+//                checkSem(binding!!.one, binding!!.two, 1, 2)
                 checkSem(binding!!.three, binding!!.four, 3, 4)
                 checkSem(binding!!.five, binding!!.six, 5, 6)
                 checkSem(binding!!.seven, binding!!.eight, 7, 8)
@@ -147,11 +173,11 @@ class AddBooks : AppCompatActivity() {
         binding!!.yearRadioGrp.setOnCheckedChangeListener { group, checkedId ->
 
             when (checkedId) {
-                binding!!.fe.id -> {
-                    Toast.makeText(this, "1st year", Toast.LENGTH_SHORT).show()
-                    setContent(1)
-                    year = "first_year"
-                }
+//                binding!!.fe.id -> {
+//                    Toast.makeText(this, "1st year", Toast.LENGTH_SHORT).show()
+//                    setContent(1)
+//                    year = "first_year"
+//                }
 
                 binding!!.se.id -> {
                     Toast.makeText(this, "2nd year", Toast.LENGTH_SHORT).show()
@@ -222,8 +248,8 @@ class AddBooks : AppCompatActivity() {
 
     private fun setContent(i: Int) {
         binding!!.sem.visibility = View.VISIBLE
-        binding!!.one.visibility = View.GONE
-        binding!!.two.visibility = View.GONE
+//        binding!!.one.visibility = View.GONE
+//        binding!!.two.visibility = View.GONE
         binding!!.three.visibility = View.GONE
         binding!!.four.visibility = View.GONE
         binding!!.five.visibility = View.GONE
@@ -232,10 +258,10 @@ class AddBooks : AppCompatActivity() {
         binding!!.eight.visibility = View.GONE
 
         when (i) {
-            1 -> {
-                binding!!.one.visibility = View.VISIBLE
-                binding!!.two.visibility = View.VISIBLE
-            }
+//            1 -> {
+//                binding!!.one.visibility = View.VISIBLE
+//                binding!!.two.visibility = View.VISIBLE
+//            }
             2 -> {
 
                 binding!!.three.visibility = View.VISIBLE

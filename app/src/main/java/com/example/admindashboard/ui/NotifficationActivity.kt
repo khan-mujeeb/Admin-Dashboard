@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.util.*
 
 class NotifficationActivity : AppCompatActivity() {
 
@@ -38,13 +39,20 @@ class NotifficationActivity : AppCompatActivity() {
     }
 
     private fun setNotificationToFirebase(name: String) {
+
+        val calendar = Calendar.getInstance()
+        val currentDate = "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.YEAR)}"
+        val currentTime = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}:${calendar.get(Calendar.SECOND)}"
+
         val randomkey = database.getReference("notification").push().key
         val text = binding!!.notification.text.toString()
 
         val notification = NotificationModel(
             randomkey!!,
             text,
-            name
+            name,
+            currentDate,
+            currentTime
         )
 
         database.getReference("notification")

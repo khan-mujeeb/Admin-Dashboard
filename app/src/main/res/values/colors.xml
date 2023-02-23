@@ -10,5 +10,7 @@
     <color name="aero">#06BEE1</color>
     <color name="anti_flash_white">#EBEBEB</color>
     <color name="dogwood">#EED2CC</color>
+    <color name="transparent">#00000000</color>
+    <color name="selected">#6E8E29</color>
     <color name="mindaro">#D7FFAB</color>
 </resources>

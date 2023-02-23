@@ -15,7 +15,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding!!.root)
 
         binding!!.books.setOnClickListener {
-            startActivity(Intent(this, AddBooks::class.java))
+            var intent = Intent(this, AddBooks::class.java)
+            intent.putExtra("heading", "Add Books")
+            startActivity(intent)
 //            Animatoo.animateShrink(this);
         }
 
@@ -24,4 +26,5 @@ class MainActivity : AppCompatActivity() {
 //            Animatoo.animateShrink(this);
         }
     }
+
 }

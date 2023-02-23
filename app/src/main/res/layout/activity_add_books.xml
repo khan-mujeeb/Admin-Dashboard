@@ -3,16 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="10dp"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
     tools:context=".ui.AddBooks">
 
+    <LinearLayout
+        android:padding="10dp"
+        android:background="#F5F5F5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize">
+        <TextView
+            android:id="@+id/appbarText"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:textColor="@color/black"
+            android:text="@string/dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
     <RelativeLayout
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
             android:textSize="18sp"
             android:id="@+id/headling_year"
             android:layout_alignParentStart="true"
@@ -22,53 +43,84 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <RadioGroup
+            android:layout_marginTop="8dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:id="@+id/year_radio_grp"
             android:layout_below="@id/headling_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RadioButton
+<!--            <RadioButton-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:background="@drawable/custom_radio_selector"-->
+<!--                android:button="@color/transparent"-->
+<!--                android:gravity="center"-->
+<!--                android:id="@+id/fe"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:text="F.E"-->
+<!--                android:layout_weight="1"-->
+<!--                android:drawableTop="@drawable/baseline_travel_explore_24"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="140dp"/>-->
 
-                android:id="@+id/fe"
-                android:textColor="@color/black"
-                android:text="F.E"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
             <RadioButton
+                android:layout_margin="5dp"
+                android:background="@drawable/custom_radio_selector"
+                android:button="@color/transparent"
+                android:gravity="center"
+                android:textStyle="bold"
                 android:id="@+id/se"
-                android:textColor="@color/black"
+
+                android:textColor="@drawable/custom_radio_text"
                 android:text="S.E"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textAlignment="center"
+                android:drawableTop="@drawable/baseline_computer_24"
+                android:layout_width="105dp"
+                android:layout_height="120dp"/>
 
             <RadioButton
+                android:textColor="@drawable/custom_radio_text"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:background="@drawable/custom_radio_selector"
+                android:button="@color/transparent"
+                android:gravity="center"
                 android:id="@+id/te"
-                android:textColor="@color/black"
                 android:text="T.E"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textAlignment="center"
+                android:drawableTop="@drawable/baseline_engineering_24"
+                android:layout_width="130dp"
+                android:layout_height="120dp"/>
 
             <RadioButton
+                android:textColor="@drawable/custom_radio_text"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:background="@drawable/custom_radio_selector"
+                android:button="@color/transparent"
+                android:gravity="center"
                 android:id="@+id/be"
-                android:textColor="@color/black"
                 android:text="B.E"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textAlignment="center"
+                android:drawableTop="@drawable/baseline_travel_explore_24"
+                android:layout_width="130dp"
+                android:layout_height="120dp"/>
         </RadioGroup>
     </RelativeLayout>
 
 
     <RelativeLayout
+        android:layout_marginTop="10dp"
         android:visibility="invisible"
         android:id="@+id/sem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textStyle="bold"
             android:textSize="18sp"
             android:id="@+id/headling_sem"
             android:layout_alignParentStart="true"
@@ -79,75 +131,78 @@
             android:layout_height="wrap_content"/>
 
         <RadioGroup
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:orientation="horizontal"
             android:id="@+id/semester_radio_grp"
             android:layout_below="@id/headling_sem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RadioButton
-                android:id="@+id/one"
-                android:textColor="@color/black"
-                android:text="1"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+<!--            <RadioButton-->
+<!--                android:id="@+id/one"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:text="1"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
 
-            <RadioButton
-                android:id="@+id/two"
-                android:textColor="@color/black"
-                android:text="2"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+<!--            <RadioButton-->
+<!--                android:id="@+id/two"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:text="2"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
 
             <RadioButton
 
                 android:id="@+id/three"
                 android:textColor="@color/black"
-                android:text="3"
+                android:text="3rd Semester"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="30dp"/>
 
             <RadioButton
                 android:id="@+id/four"
                 android:textColor="@color/black"
-                android:text="4"
+                android:text="4th Semester"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="30dp"/>
 
 
             <RadioButton
                 android:id="@+id/five"
                 android:textColor="@color/black"
-                android:text="5"
+                android:text="5th Semester"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="30dp"/>
 
             <RadioButton
                 android:id="@+id/six"
                 android:textColor="@color/black"
-                android:text="6"
+                android:text="6th Semester"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="30dp"/>
 
             <RadioButton
                 android:id="@+id/seven"
                 android:textColor="@color/black"
-                android:text="7"
+                android:text="7th Semester"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="30dp"/>
 
             <RadioButton
                 android:id="@+id/eight"
                 android:textColor="@color/black"
-                android:text="8"
+                android:text="8th Semester"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="30dp"/>
         </RadioGroup>
     </RelativeLayout>
 
@@ -165,6 +220,10 @@
 <!--        android:layout_height="wrap_content"/>-->
 
     <TextView
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
         android:textSize="18sp"
         android:id="@+id/headling_sub"
         android:layout_alignParentStart="true"
@@ -174,57 +233,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <RadioGroup
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:visibility="gone"
         android:id="@+id/subject_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RadioButton
+
             android:textColor="@color/black"
             android:id="@+id/subj_1"
             android:text="subject 1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="30dp"/>
 
         <RadioButton
             android:textColor="@color/black"
             android:id="@+id/subj_2"
             android:text="subject 2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="30dp"/>
 
         <RadioButton
             android:textColor="@color/black"
             android:id="@+id/subj_3"
             android:text="subject 3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="30dp"/>
 
         <RadioButton
+
             android:textColor="@color/black"
             android:id="@+id/subj_4"
             android:text="subject 4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="30dp"/>
 
         <RadioButton
             android:textColor="@color/black"
             android:id="@+id/subj_5"
             android:text="subject 5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="30dp"/>
     </RadioGroup>
 
     <androidx.appcompat.widget.AppCompatButton
+
         android:id="@+id/upload"
         android:layout_margin="10dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:drawablePadding="10dp"
         android:text="Upload"
-        android:drawableStart="@drawable/ic_baseline_upload_file_24"
+
+        android:drawableTop="@drawable/ic_baseline_upload_file_24"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -241,10 +306,13 @@
 
 
     <Button
+        android:padding="20dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/selected"
         android:id="@+id/submit"
         android:layout_margin="10dp"
         android:text="Submit"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
