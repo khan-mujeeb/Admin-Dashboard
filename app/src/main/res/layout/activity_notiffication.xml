@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:padding="8dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".ui.NotifficationActivity">
+    <EditText
+        android:padding="10dp"
+        android:id="@+id/notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/push"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:text="Push"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

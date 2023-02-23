@@ -5,15 +5,14 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.admindashboard.R
 import com.example.admindashboard.data.Pdf
@@ -23,10 +22,10 @@ import com.google.firebase.storage.FirebaseStorage
 
 class AddBooks : AppCompatActivity() {
 
-     var year: String = ""
-     var department: String = "IT"
-     var semester: String = ""
-     var subject: String = ""
+    var year: String = ""
+    var department: String = "IT"
+    var semester: String = ""
+    var subject: String = ""
 
     private var uriValue: Uri? = null
     var binding: ActivityAddBooksBinding? = null
@@ -54,8 +53,6 @@ class AddBooks : AppCompatActivity() {
         }
 
 
-
-
     }
 
     private fun uploadPdfToFirebaseStorage(uriValue: Uri?) {
@@ -65,16 +62,17 @@ class AddBooks : AppCompatActivity() {
         val storageRef = FirebaseStorage.getInstance().reference
         val pdfRef = storageRef.child("books/${uriValue!!.lastPathSegment}")
         val uploadTask = pdfRef.putFile(uriValue)
-        uploadTask.addOnSuccessListener { taskSnapshot ->
+        uploadTask.addOnSuccessListener {
             // Get the download URL of the PDF file and save it to Firebase Realtime Database
             pdfRef.downloadUrl.addOnSuccessListener { downloadUri ->
                 savePdfDownloadUrlToFirebaseRealtimeDatabase(downloadUri.toString())
             }
-        }.addOnFailureListener { exception ->
+        }.addOnFailureListener {
             // Handle the error
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun startLoadingScreen() {
         val builder = AlertDialog.Builder(this)
         builder.setView(layoutInflater.inflate(R.layout.loading_screen, null))
@@ -84,21 +82,26 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun savePdfDownloadUrlToFirebaseRealtimeDatabase(downloadUrl: String) {
-        println("mujeeb $subject")
         val databaseRef = FirebaseDatabase.getInstance().getReference("books")
             .child(department)
             .child(year)
             .child("${semester}_sem")
             .child(subject)
         val pdfId = subject
-        val pdf = Pdf(pdfId, downloadUrl)
-        pdfId?.let {
+
+        val key = databaseRef.push().key
+        val pdf = Pdf(
+            key!!,
+            pdfId,
+            downloadUrl
+        )
+
+        pdfId.let {
             databaseRef.setValue(pdf)
         }
         dialog.dismiss()
         Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
     }
-
 
 
     private fun onUploadClick() {
@@ -131,10 +134,10 @@ class AddBooks : AppCompatActivity() {
                 checkedId == binding!!.five.id || checkedId == binding!!.six.id ||
                 checkedId == binding!!.seven.id || checkedId == binding!!.eight.id
             ) {
-                checkSem(binding!!.one, binding!!.two, 1, 2 )
-                checkSem(binding!!.three, binding!!.four, 3, 4 )
+                checkSem(binding!!.one, binding!!.two, 1, 2)
+                checkSem(binding!!.three, binding!!.four, 3, 4)
                 checkSem(binding!!.five, binding!!.six, 5, 6)
-                checkSem(binding!!.seven, binding!!.eight, 7, 8 )
+                checkSem(binding!!.seven, binding!!.eight, 7, 8)
 //                binding!!.subject.visibility = View.VISIBLE
             }
         }
@@ -254,13 +257,13 @@ class AddBooks : AppCompatActivity() {
         if (one.isChecked)
 
             semester = semNumberToWord(i)
-        if(two.isChecked)
+        if (two.isChecked)
             semester = semNumberToWord(i1)
     }
 
     private fun semNumberToWord(i: Int): String {
         var word = ""
-        when(i) {
+        when (i) {
             1 -> {
                 word = "first"
 
@@ -272,11 +275,20 @@ class AddBooks : AppCompatActivity() {
 
             3 -> {
                 word = "third"
+                semThreeSubject()
 
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                    semThreeSubject()
+                }
 
             }
             4 -> {
                 word = "fourth"
+
+                semFourthSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                    semFourthSubject()
+                }
 
             }
             5 -> {
@@ -290,9 +302,27 @@ class AddBooks : AppCompatActivity() {
             }
             6 -> {
                 word = "six"
-                semSixSubject()
+//                semSixSubject()
+                setSemesterData(
+                    "Computer Network and Security",
+                    "Data Science and Big Data Analytics",
+                    "Web Application Development",
+                    "Elective-II",
+                    "",
+                    0,0,0,0,1
+
+                )
                 binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-                    semSixSubject()
+//                    semSixSubject()
+                    setSemesterData(
+                        "Computer Network and Security",
+                        "Data Science and Big Data Analytics",
+                        "Web Application Development",
+                        "Elective-II",
+                        "",
+                        0,0,0,0,1
+
+                    )
                 }
 
             }
@@ -306,6 +336,40 @@ class AddBooks : AppCompatActivity() {
         return word
     }
 
+    private fun setSemesterData(
+        s: String,
+        s1: String,
+        s2: String,
+        s3: String,
+        s4: String,
+        i: Int,
+        i1: Int,
+        i2: Int,
+        i3: Int,
+        i4: Int
+    ) {
+        binding!!.subjectLayout.visibility = View.VISIBLE
+        setSubjectVisiblity(binding!!.subj1, i)
+        setSubjectVisiblity(binding!!.subj2, i1)
+        setSubjectVisiblity(binding!!.subj3, i2)
+        setSubjectVisiblity(binding!!.subj4, i3)
+        setSubjectVisiblity(binding!!.subj5, i4)
+
+        setSubjectData(binding!!.subj1, s)
+        setSubjectData(binding!!.subj2, s1)
+        setSubjectData(binding!!.subj3, s2)
+        setSubjectData(binding!!.subj4, s3)
+        setSubjectData(binding!!.subj5, s4)
+    }
+
+    private fun setSubjectVisiblity(subj: RadioButton, i: Int) {
+        if (i==1) {
+           subj.visibility = View.INVISIBLE
+        }else{
+            subj.visibility = View.VISIBLE
+        }
+    }
+
     private fun semSixSubject() {
         binding!!.subjectLayout.visibility = View.VISIBLE
         binding!!.subj5.visibility = View.INVISIBLE
@@ -314,6 +378,38 @@ class AddBooks : AppCompatActivity() {
         setSubjectData(binding!!.subj2, "Data Science and Big Data Analytics")
         setSubjectData(binding!!.subj3, "Web Application Development")
         setSubjectData(binding!!.subj4, "Elective-II")
+    }
+
+    private fun semSeventhSubject() {
+        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subj5.visibility = View.INVISIBLE
+
+        setSubjectData(binding!!.subj1, "Computer Network and Security")
+        setSubjectData(binding!!.subj2, "Data Science and Big Data Analytics")
+        setSubjectData(binding!!.subj3, "Web Application Development")
+        setSubjectData(binding!!.subj4, "Elective-II")
+    }
+
+    private fun semThreeSubject() {
+        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subj5.visibility = View.VISIBLE
+
+        setSubjectData(binding!!.subj1, "Discrete Mathematics ")
+        setSubjectData(binding!!.subj2, "Logic Design and Computer Organization ")
+        setSubjectData(binding!!.subj3, "Data Structures and Algorithms ")
+        setSubjectData(binding!!.subj4, "Object Oriented Programming")
+        setSubjectData(binding!!.subj5, "Basics of Computer Network")
+    }
+
+    private fun semFourthSubject() {
+        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subj5.visibility = View.VISIBLE
+
+        setSubjectData(binding!!.subj1, "Engineering Mathematics- III ")
+        setSubjectData(binding!!.subj2, "Processor Architecture")
+        setSubjectData(binding!!.subj3, "Database Management System")
+        setSubjectData(binding!!.subj4, "Computer Graphics")
+        setSubjectData(binding!!.subj5, "Software Engineering")
     }
 
     private fun semFiveSubject() {
@@ -328,9 +424,7 @@ class AddBooks : AppCompatActivity() {
 
     private fun setSubjectData(subjBtn: RadioButton, sub: String) {
         subjBtn.text = sub
-        println("khan njsncsnc")
         if (subjBtn.isChecked) {
-            println("khan")
             subject = sub
         }
     }
@@ -338,7 +432,7 @@ class AddBooks : AppCompatActivity() {
     // releasing resources
     override fun onDestroy() {
         super.onDestroy()
-        if (binding!=null) {
+        if (binding != null) {
             binding = null
         }
     }

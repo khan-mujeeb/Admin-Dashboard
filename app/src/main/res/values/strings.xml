@@ -10,4 +10,8 @@
     <string name="passwordHint">********</string>
     <string name="login">Login</string>
     <string name="please_wait">Please Wait...</string>
+    <string name="placement_assistant">Placement Assistant</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="book">book</string>
+    <string name="display_notification">Display Notification</string>
 </resources>
