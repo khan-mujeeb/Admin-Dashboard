@@ -31,6 +31,7 @@ class AddBooks : AppCompatActivity() {
     var semester: String = ""
     var subject: String = ""
 
+     var from: String = ""
     private var uriValue: Uri? = null
     private lateinit var auth: FirebaseAuth
     var binding: ActivityAddBooksBinding? = null
@@ -48,12 +49,13 @@ class AddBooks : AppCompatActivity() {
         val heading = intent.getStringExtra("heading")
         binding!!.appbarText.text = heading
 
+         from = intent.getStringExtra("from")!!
+
+
+
         setYearViewGroup()
         setSemViewGroup()
         onUploadClick()
-
-
-
 
         auth = Firebase.auth
 
@@ -66,6 +68,7 @@ class AddBooks : AppCompatActivity() {
 
     }
 
+    // upload books / pyq
     private fun uploadPdfToFirebaseStorage(uriValue: Uri?) {
 
         startLoadingScreen()
@@ -105,26 +108,63 @@ class AddBooks : AppCompatActivity() {
         val list = email!!.split("_", "@").map { it.trim() }
         val name = "${list[0]} ${list[1]}"
 
-        val databaseRef = FirebaseDatabase.getInstance().getReference("books")
-            .child(department)
-            .child(year)
-            .child("${semester}_sem")
-            .child(subject)
-        val pdfId = subject
 
-        val key = databaseRef.push().key
-        val pdf = Pdf(
-            key!!,
-            pdfId,
-            downloadUrl,
-            name,
-            currentDate,
-            currentTime
-        )
 
-        pdfId.let {
-            databaseRef.setValue(pdf)
+        if (from == "pyq") {
+
+            val database = FirebaseDatabase.getInstance().getReference("pyq")
+            val key = database.push().key.toString()
+
+            val databaseRef = database
+                .child(department)
+                .child(year)
+                .child("${semester}_sem")
+                .child(key)
+
+            val pdfId = subject
+
+            val pdf = Pdf(
+                key!!,
+                pdfId,
+                downloadUrl,
+                name,
+                currentDate,
+                currentTime
+            )
+
+            pdfId.let {
+                databaseRef.setValue(pdf)
+            }
+
+        }else {
+
+            val database = FirebaseDatabase.getInstance().getReference("books")
+            val key = database.push().key.toString()
+
+            val databaseRef = database
+                .child(department)
+                .child(year)
+                .child("${semester}_sem")
+                .child(subject)
+                .child(key)
+
+            val pdfId = subject
+
+            val pdf = Pdf(
+                key!!,
+                pdfId,
+                downloadUrl,
+                name,
+                currentDate,
+                currentTime
+            )
+
+            pdfId.let {
+                databaseRef.setValue(pdf)
+            }
         }
+
+
         dialog.dismiss()
         Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
     }
@@ -290,56 +330,47 @@ class AddBooks : AppCompatActivity() {
     private fun semNumberToWord(i: Int): String {
         var word = ""
         when (i) {
-            1 -> {
-                word = "first"
-
-            }
-            2 -> {
-                word = "second"
-
-            }
 
             3 -> {
                 word = "third"
-                semThreeSubject()
 
-                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+
+                if (from!="pyq") {
                     semThreeSubject()
+                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                        semThreeSubject()
+                    }
                 }
+
 
             }
             4 -> {
                 word = "fourth"
 
-                semFourthSubject()
-                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                if (from!="pyq") {
                     semFourthSubject()
+                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                        semFourthSubject()
+                    }
                 }
+
 
             }
             5 -> {
                 word = "fifth"
 
-                semFiveSubject()
-                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                if (from!="pyq") {
                     semFiveSubject()
+                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                        semFiveSubject()
+                    }
                 }
 
             }
             6 -> {
                 word = "six"
-//                semSixSubject()
-                setSemesterData(
-                    "Computer Network and Security",
-                    "Data Science and Big Data Analytics",
-                    "Web Application Development",
-                    "Elective-II",
-                    "",
-                    0,0,0,0,1
-
-                )
-                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-//                    semSixSubject()
+                if (from!="pyq") {
+                    //                semSixSubject()
                     setSemesterData(
                         "Computer Network and Security",
                         "Data Science and Big Data Analytics",
@@ -349,14 +380,32 @@ class AddBooks : AppCompatActivity() {
                         0,0,0,0,1
 
                     )
+                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+//                    semSixSubject()
+                        setSemesterData(
+                            "Computer Network and Security",
+                            "Data Science and Big Data Analytics",
+                            "Web Application Development",
+                            "Elective-II",
+                            "",
+                            0,0,0,0,1
+
+                        )
+                    }
                 }
 
             }
             7 -> {
                 word = "seventh"
+                if (from!="pyq"){
+                    semSeventhSubject()
+                }
             }
             8 -> {
                 word = "eight"
+                if (from!="pyq"){
+                    semEightSubject()
+                }
             }
         }
         return word
@@ -374,7 +423,7 @@ class AddBooks : AppCompatActivity() {
         i3: Int,
         i4: Int
     ) {
-        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subjectLayoutView.visibility = View.VISIBLE
         setSubjectVisiblity(binding!!.subj1, i)
         setSubjectVisiblity(binding!!.subj2, i1)
         setSubjectVisiblity(binding!!.subj3, i2)
@@ -397,7 +446,7 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun semSixSubject() {
-        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subjectLayoutView.visibility = View.VISIBLE
         binding!!.subj5.visibility = View.INVISIBLE
 
         setSubjectData(binding!!.subj1, "Computer Network and Security")
@@ -407,17 +456,28 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun semSeventhSubject() {
-        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subjectLayoutView.visibility = View.VISIBLE
+        binding!!.subj5.visibility = View.VISIBLE
+
+        setSubjectData(binding!!.subj1, "Information and Storage Retrieval")
+        setSubjectData(binding!!.subj2, "Software Project Management")
+        setSubjectData(binding!!.subj3, "Deep Learning")
+        setSubjectData(binding!!.subj4, "Elective–III")
+        setSubjectData(binding!!.subj5, "Elective–IV")
+    }
+
+    private fun semEightSubject() {
+        binding!!.subjectLayoutView.visibility = View.VISIBLE
         binding!!.subj5.visibility = View.INVISIBLE
 
-        setSubjectData(binding!!.subj1, "Computer Network and Security")
-        setSubjectData(binding!!.subj2, "Data Science and Big Data Analytics")
-        setSubjectData(binding!!.subj3, "Web Application Development")
-        setSubjectData(binding!!.subj4, "Elective-II")
+        setSubjectData(binding!!.subj1, "Distributed Systems")
+        setSubjectData(binding!!.subj2, "Start up and Ecosystem")
+        setSubjectData(binding!!.subj3, "Elective–III")
+        setSubjectData(binding!!.subj4, "Elective–IV")
     }
 
     private fun semThreeSubject() {
-        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subjectLayoutView.visibility = View.VISIBLE
         binding!!.subj5.visibility = View.VISIBLE
 
         setSubjectData(binding!!.subj1, "Discrete Mathematics ")
@@ -428,7 +488,7 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun semFourthSubject() {
-        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subjectLayoutView.visibility = View.VISIBLE
         binding!!.subj5.visibility = View.VISIBLE
 
         setSubjectData(binding!!.subj1, "Engineering Mathematics- III ")
@@ -439,7 +499,7 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun semFiveSubject() {
-        binding!!.subjectLayout.visibility = View.VISIBLE
+        binding!!.subjectLayoutView.visibility = View.VISIBLE
         binding!!.subj5.visibility = View.VISIBLE
         setSubjectData(binding!!.subj1, "Theory of Computation")
         setSubjectData(binding!!.subj2, "Operating System")
@@ -448,6 +508,7 @@ class AddBooks : AppCompatActivity() {
         setSubjectData(binding!!.subj5, "Elective–I")
     }
 
+    // get subject
     private fun setSubjectData(subjBtn: RadioButton, sub: String) {
         subjBtn.text = sub
         if (subjBtn.isChecked) {

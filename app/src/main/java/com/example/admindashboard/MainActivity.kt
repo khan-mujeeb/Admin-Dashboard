@@ -14,16 +14,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
+
+        // go to add books
         binding!!.books.setOnClickListener {
-            var intent = Intent(this, AddBooks::class.java)
+            val intent = Intent(this, AddBooks::class.java)
             intent.putExtra("heading", "Add Books")
+            intent.putExtra("from", "add_books")
             startActivity(intent)
-//            Animatoo.animateShrink(this);
         }
 
+        // go to add notification
         binding!!.floatingBtn.setOnClickListener {
             startActivity(Intent(this, NotifficationActivity::class.java))
-//            Animatoo.animateShrink(this);
+        }
+
+        // go to add pyq
+        binding!!.pyq.setOnClickListener {
+            val intent2 = Intent(this, AddBooks::class.java)
+            intent2.putExtra("heading", "Add PYQs")
+            intent2.putExtra("from", "pyq")
+            startActivity(intent2)
         }
     }
 

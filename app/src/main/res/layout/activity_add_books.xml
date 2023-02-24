@@ -219,64 +219,71 @@
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"/>-->
 
-    <TextView
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:id="@+id/headling_sub"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:textColor="@color/black"
-        android:text="Choose Subject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <RadioGroup
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:visibility="gone"
-        android:id="@+id/subject_layout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:orientation="vertical"
+       android:visibility="gone"
+       android:id="@+id/subjectLayoutView"
+       android:layout_height="wrap_content">
+       <TextView
+           android:paddingStart="10dp"
+           android:paddingEnd="10dp"
+           android:layout_marginTop="10dp"
+           android:textStyle="bold"
+           android:textSize="18sp"
+           android:id="@+id/headling_sub"
+           android:layout_alignParentStart="true"
+           android:layout_alignParentTop="true"
+           android:textColor="@color/black"
+           android:text="Choose Subject"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"/>
+       <RadioGroup
+           android:paddingStart="10dp"
+           android:paddingEnd="10dp"
 
-            android:textColor="@color/black"
-            android:id="@+id/subj_1"
-            android:text="subject 1"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
+           android:id="@+id/subject_layout"
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <RadioButton
 
-        <RadioButton
-            android:textColor="@color/black"
-            android:id="@+id/subj_2"
-            android:text="subject 2"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
+               android:textColor="@color/black"
+               android:id="@+id/subj_1"
+               android:text="subject 1"
+               android:layout_width="wrap_content"
+               android:layout_height="30dp"/>
 
-        <RadioButton
-            android:textColor="@color/black"
-            android:id="@+id/subj_3"
-            android:text="subject 3"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
+           <RadioButton
+               android:textColor="@color/black"
+               android:id="@+id/subj_2"
+               android:text="subject 2"
+               android:layout_width="wrap_content"
+               android:layout_height="30dp"/>
 
-        <RadioButton
+           <RadioButton
+               android:textColor="@color/black"
+               android:id="@+id/subj_3"
+               android:text="subject 3"
+               android:layout_width="wrap_content"
+               android:layout_height="30dp"/>
 
-            android:textColor="@color/black"
-            android:id="@+id/subj_4"
-            android:text="subject 4"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
+           <RadioButton
 
-        <RadioButton
-            android:textColor="@color/black"
-            android:id="@+id/subj_5"
-            android:text="subject 5"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
-    </RadioGroup>
+               android:textColor="@color/black"
+               android:id="@+id/subj_4"
+               android:text="subject 4"
+               android:layout_width="wrap_content"
+               android:layout_height="30dp"/>
+
+           <RadioButton
+               android:textColor="@color/black"
+               android:id="@+id/subj_5"
+               android:text="subject 5"
+               android:layout_width="wrap_content"
+               android:layout_height="30dp"/>
+       </RadioGroup>
+   </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
 
@@ -295,6 +302,10 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textAlignment="center"
         android:id="@+id/pdf_path"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
