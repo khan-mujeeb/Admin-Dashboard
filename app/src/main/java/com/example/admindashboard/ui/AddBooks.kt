@@ -31,7 +31,7 @@ class AddBooks : AppCompatActivity() {
     var semester: String = ""
     var subject: String = ""
 
-     var from: String = ""
+    var from: String = ""
     private var uriValue: Uri? = null
     private lateinit var auth: FirebaseAuth
     var binding: ActivityAddBooksBinding? = null
@@ -49,7 +49,7 @@ class AddBooks : AppCompatActivity() {
         val heading = intent.getStringExtra("heading")
         binding!!.appbarText.text = heading
 
-         from = intent.getStringExtra("from")!!
+        from = intent.getStringExtra("from")!!
 
 
 
@@ -98,11 +98,18 @@ class AddBooks : AppCompatActivity() {
     private fun savePdfDownloadUrlToFirebaseRealtimeDatabase(downloadUrl: String) {
 
         val calendar = Calendar.getInstance()
-        val currentDate = "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(
-            Calendar.YEAR)}"
+        val currentDate =
+            "${calendar.get(Calendar.DAY_OF_MONTH)}-${calendar.get(Calendar.MONTH) + 1}-${
+                calendar.get(
+                    Calendar.YEAR
+                )
+            }"
 
-        val currentTime = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}:${calendar.get(
-            Calendar.SECOND)}"
+        val currentTime = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}:${
+            calendar.get(
+                Calendar.SECOND
+            )
+        }"
 
         val email = auth.currentUser!!.email
         val list = email!!.split("_", "@").map { it.trim() }
@@ -136,7 +143,7 @@ class AddBooks : AppCompatActivity() {
                 databaseRef.setValue(pdf)
             }
 
-        }else {
+        } else {
 
             val database = FirebaseDatabase.getInstance().getReference("books")
             val key = database.push().key.toString()
@@ -335,7 +342,7 @@ class AddBooks : AppCompatActivity() {
                 word = "third"
 
 
-                if (from!="pyq") {
+                if (from != "pyq") {
                     semThreeSubject()
                     binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                         semThreeSubject()
@@ -347,7 +354,7 @@ class AddBooks : AppCompatActivity() {
             4 -> {
                 word = "fourth"
 
-                if (from!="pyq") {
+                if (from != "pyq") {
                     semFourthSubject()
                     binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                         semFourthSubject()
@@ -359,7 +366,7 @@ class AddBooks : AppCompatActivity() {
             5 -> {
                 word = "fifth"
 
-                if (from!="pyq") {
+                if (from != "pyq") {
                     semFiveSubject()
                     binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                         semFiveSubject()
@@ -369,7 +376,7 @@ class AddBooks : AppCompatActivity() {
             }
             6 -> {
                 word = "six"
-                if (from!="pyq") {
+                if (from != "pyq") {
                     //                semSixSubject()
                     setSemesterData(
                         "Computer Network and Security",
@@ -377,7 +384,7 @@ class AddBooks : AppCompatActivity() {
                         "Web Application Development",
                         "Elective-II",
                         "",
-                        0,0,0,0,1
+                        0, 0, 0, 0, 1
 
                     )
                     binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
@@ -388,7 +395,7 @@ class AddBooks : AppCompatActivity() {
                             "Web Application Development",
                             "Elective-II",
                             "",
-                            0,0,0,0,1
+                            0, 0, 0, 0, 1
 
                         )
                     }
@@ -397,13 +404,13 @@ class AddBooks : AppCompatActivity() {
             }
             7 -> {
                 word = "seventh"
-                if (from!="pyq"){
+                if (from != "pyq") {
                     semSeventhSubject()
                 }
             }
             8 -> {
                 word = "eight"
-                if (from!="pyq"){
+                if (from != "pyq") {
                     semEightSubject()
                 }
             }
@@ -438,9 +445,9 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun setSubjectVisiblity(subj: RadioButton, i: Int) {
-        if (i==1) {
-           subj.visibility = View.INVISIBLE
-        }else{
+        if (i == 1) {
+            subj.visibility = View.INVISIBLE
+        } else {
             subj.visibility = View.VISIBLE
         }
     }

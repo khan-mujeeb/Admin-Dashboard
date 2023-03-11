@@ -3,327 +3,359 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/anti_flash_white"
+    android:orientation="vertical"
     tools:context=".ui.AddBooks">
 
     <LinearLayout
-        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="#F5F5F5"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize">
+        android:padding="10dp">
+
         <TextView
             android:id="@+id/appbarText"
-            android:textStyle="bold"
-            android:textSize="26sp"
-            android:textColor="@color/black"
-            android:text="@string/dashboard"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/dashboard"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <RelativeLayout
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
         <TextView
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="18sp"
             android:id="@+id/headling_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
             android:text="Choose Year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <RadioGroup
+            android:id="@+id/year_radio_grp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/headling_year"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:id="@+id/year_radio_grp"
-            android:layout_below="@id/headling_year"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-<!--            <RadioButton-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:background="@drawable/custom_radio_selector"-->
-<!--                android:button="@color/transparent"-->
-<!--                android:gravity="center"-->
-<!--                android:id="@+id/fe"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:text="F.E"-->
-<!--                android:layout_weight="1"-->
-<!--                android:drawableTop="@drawable/baseline_travel_explore_24"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="140dp"/>-->
+            android:orientation="horizontal">
+            <!--            <RadioButton-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:background="@drawable/custom_radio_selector"-->
+            <!--                android:button="@color/transparent"-->
+            <!--                android:gravity="center"-->
+            <!--                android:id="@+id/fe"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:text="F.E"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:drawableTop="@drawable/baseline_travel_explore_24"-->
+            <!--                android:layout_width="150dp"-->
+            <!--                android:layout_height="140dp"/>-->
 
             <RadioButton
+                android:id="@+id/se"
+                android:layout_width="105dp"
+                android:layout_height="120dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/custom_radio_selector"
                 android:button="@color/transparent"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:id="@+id/se"
 
-                android:textColor="@drawable/custom_radio_text"
+                android:drawableTop="@drawable/baseline_computer_24"
+                android:gravity="center"
                 android:text="S.E"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/baseline_computer_24"
-                android:layout_width="105dp"
-                android:layout_height="120dp"/>
+                android:textColor="@drawable/custom_radio_text"
+                android:textStyle="bold" />
 
             <RadioButton
-                android:textColor="@drawable/custom_radio_text"
-                android:textStyle="bold"
-                android:layout_margin="5dp"
-                android:background="@drawable/custom_radio_selector"
-                android:button="@color/transparent"
-                android:gravity="center"
                 android:id="@+id/te"
-                android:text="T.E"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:drawableTop="@drawable/baseline_engineering_24"
                 android:layout_width="130dp"
-                android:layout_height="120dp"/>
-
-            <RadioButton
-                android:textColor="@drawable/custom_radio_text"
-                android:textStyle="bold"
+                android:layout_height="120dp"
                 android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/custom_radio_selector"
                 android:button="@color/transparent"
+                android:drawableTop="@drawable/baseline_engineering_24"
                 android:gravity="center"
-                android:id="@+id/be"
-                android:text="B.E"
-                android:layout_weight="1"
+                android:text="T.E"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/baseline_travel_explore_24"
+                android:textColor="@drawable/custom_radio_text"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/be"
                 android:layout_width="130dp"
-                android:layout_height="120dp"/>
+                android:layout_height="120dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_selector"
+                android:button="@color/transparent"
+                android:drawableTop="@drawable/baseline_travel_explore_24"
+                android:gravity="center"
+                android:text="B.E"
+                android:textAlignment="center"
+                android:textColor="@drawable/custom_radio_text"
+                android:textStyle="bold" />
         </RadioGroup>
     </RelativeLayout>
 
 
     <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:visibility="invisible"
         android:id="@+id/sem"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible">
+
         <TextView
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:textStyle="bold"
-            android:textSize="18sp"
             android:id="@+id/headling_sem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:textColor="@color/black"
-            android:text="Choose Semester"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <RadioGroup
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:orientation="horizontal"
-            android:id="@+id/semester_radio_grp"
-            android:layout_below="@id/headling_sem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-<!--            <RadioButton-->
-<!--                android:id="@+id/one"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:text="1"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
+            android:text="Choose Semester"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-<!--            <RadioButton-->
-<!--                android:id="@+id/two"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:text="2"-->
-<!--                android:layout_weight="1"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
+        <RadioGroup
+            android:id="@+id/semester_radio_grp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/headling_sem"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
+            <!--            <RadioButton-->
+            <!--                android:id="@+id/one"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:text="1"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"/>-->
+
+            <!--            <RadioButton-->
+            <!--                android:id="@+id/two"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:text="2"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"/>-->
 
             <RadioButton
 
                 android:id="@+id/three"
-                android:textColor="@color/black"
-                android:text="3rd Semester"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="3rd Semester"
+                android:textColor="@color/black" />
 
             <RadioButton
                 android:id="@+id/four"
-                android:textColor="@color/black"
-                android:text="4th Semester"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="4th Semester"
+                android:textColor="@color/black" />
 
 
             <RadioButton
                 android:id="@+id/five"
-                android:textColor="@color/black"
-                android:text="5th Semester"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="5th Semester"
+                android:textColor="@color/black" />
 
             <RadioButton
                 android:id="@+id/six"
-                android:textColor="@color/black"
-                android:text="6th Semester"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="6th Semester"
+                android:textColor="@color/black" />
 
             <RadioButton
                 android:id="@+id/seven"
-                android:textColor="@color/black"
-                android:text="7th Semester"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="7th Semester"
+                android:textColor="@color/black" />
 
             <RadioButton
                 android:id="@+id/eight"
-                android:textColor="@color/black"
-                android:text="8th Semester"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:text="8th Semester"
+                android:textColor="@color/black" />
         </RadioGroup>
     </RelativeLayout>
 
 
-<!--    <com.google.android.material.textfield.TextInputEditText-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:visibility="invisible"-->
-<!--        android:padding="10dp"-->
-<!--        android:hint="subject"-->
-<!--        android:background="@drawable/edit_text_bg"-->
-<!--        android:inputType="textAutoComplete"-->
-<!--        android:id="@+id/subject"-->
-<!--        android:maxLines="1"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <!--    <com.google.android.material.textfield.TextInputEditText-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:visibility="invisible"-->
+    <!--        android:padding="10dp"-->
+    <!--        android:hint="subject"-->
+    <!--        android:background="@drawable/edit_text_bg"-->
+    <!--        android:inputType="textAutoComplete"-->
+    <!--        android:id="@+id/subject"-->
+    <!--        android:maxLines="1"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"/>-->
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:orientation="vertical"
-       android:visibility="gone"
-       android:id="@+id/subjectLayoutView"
-       android:layout_height="wrap_content">
-       <TextView
-           android:paddingStart="10dp"
-           android:paddingEnd="10dp"
-           android:layout_marginTop="10dp"
-           android:textStyle="bold"
-           android:textSize="18sp"
-           android:id="@+id/headling_sub"
-           android:layout_alignParentStart="true"
-           android:layout_alignParentTop="true"
-           android:textColor="@color/black"
-           android:text="Choose Subject"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"/>
-       <RadioGroup
-           android:paddingStart="10dp"
-           android:paddingEnd="10dp"
+    <LinearLayout
+        android:id="@+id/subjectLayoutView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-           android:id="@+id/subject_layout"
-           android:orientation="vertical"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-           <RadioButton
+        <TextView
+            android:id="@+id/headling_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Choose Subject"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-               android:textColor="@color/black"
-               android:id="@+id/subj_1"
-               android:text="subject 1"
-               android:layout_width="wrap_content"
-               android:layout_height="30dp"/>
+        <RadioGroup
+            android:id="@+id/subject_layout"
+            android:layout_width="match_parent"
 
-           <RadioButton
-               android:textColor="@color/black"
-               android:id="@+id/subj_2"
-               android:text="subject 2"
-               android:layout_width="wrap_content"
-               android:layout_height="30dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
-           <RadioButton
-               android:textColor="@color/black"
-               android:id="@+id/subj_3"
-               android:text="subject 3"
-               android:layout_width="wrap_content"
-               android:layout_height="30dp"/>
+            <RadioButton
 
-           <RadioButton
+                android:id="@+id/subj_1"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="subject 1"
+                android:textColor="@color/black" />
 
-               android:textColor="@color/black"
-               android:id="@+id/subj_4"
-               android:text="subject 4"
-               android:layout_width="wrap_content"
-               android:layout_height="30dp"/>
+            <RadioButton
+                android:id="@+id/subj_2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="subject 2"
+                android:textColor="@color/black" />
 
-           <RadioButton
-               android:textColor="@color/black"
-               android:id="@+id/subj_5"
-               android:text="subject 5"
-               android:layout_width="wrap_content"
-               android:layout_height="30dp"/>
-       </RadioGroup>
-   </LinearLayout>
+            <RadioButton
+                android:id="@+id/subj_3"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="subject 3"
+                android:textColor="@color/black" />
 
-    <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
 
-        android:id="@+id/upload"
-        android:layout_margin="10dp"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:drawablePadding="10dp"
-        android:text="Upload"
+                android:id="@+id/subj_4"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="subject 4"
+                android:textColor="@color/black" />
 
-        android:drawableTop="@drawable/ic_baseline_upload_file_24"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/subj_5"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="subject 5"
+                android:textColor="@color/black" />
+        </RadioGroup>
+    </LinearLayout>
 
-    <TextView
-
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/dotted_bg"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="5dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:textAlignment="center"
-        android:id="@+id/pdf_path"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/black"
-        android:text="Ldco nirali.pdf"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/baseline_cloud_upload_24"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/publication"
+            android:textAlignment="center"
+            android:hint="Enter Publications name"
+            android:background="@drawable/edit_text_bg"
+            android:textColorHint="@color/hint"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/pdf_logo"
+            android:id="@+id/pdf_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/new_book_pdf"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/selected"
+        android:id="@+id/upload"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:padding="5dp"
+        android:text="Browse files" />
 
     <Button
-        android:padding="20dp"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/selected"
         android:id="@+id/submit"
-        android:layout_margin="10dp"
-        android:text="Submit"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/selected"
+        android:padding="5dp"
+        android:text="Submit" />
 
 </LinearLayout>

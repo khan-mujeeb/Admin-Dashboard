@@ -2,63 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     style="@style/loginScreen"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.LoginActivity">
+
     <TextView
-        android:textSize="36sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/login_your_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textSize="36sp" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textSize="26sp"
         android:text="@string/please_provide_all_the_required_information"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textSize="26sp" />
 
     <TextView
-        android:layout_marginTop="50dp"
-        android:textSize="16sp"
-        android:text="@string/modern_mail_id"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/modern_mail_id"
+        android:textSize="16sp" />
+
     <EditText
-        android:padding="10dp"
-        android:hint="@string/salman_khan_moderncoe_edu_in"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="10dp"
         android:id="@+id/email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/salman_khan_moderncoe_edu_in"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
 
     <TextView
 
-        android:layout_marginTop="20dp"
-        android:textSize="16sp"
-        android:text="@string/password"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/password"
+        android:textSize="16sp" />
+
     <EditText
-        android:padding="10dp"
-        android:hint="@string/passwordHint"
-        android:inputType="numberPassword"
-        android:layout_marginTop="10dp"
         android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/passwordHint"
+        android:inputType="numberPassword"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:padding="10dp"
-        android:textStyle="bold"
         android:text="@string/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textStyle="bold" />
 
 
 </LinearLayout>
