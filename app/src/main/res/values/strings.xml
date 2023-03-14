@@ -15,4 +15,7 @@
     <string name="book">book</string>
     <string name="display_notification">Display Notification</string>
     <string name="new_book_pdf">new_book.pdf</string>
+    <string name="upload">Upload</string>
+    <string name="browse_files">Browse files</string>
+    <string name="enter_publications_name">Enter Publications name</string>
 </resources>

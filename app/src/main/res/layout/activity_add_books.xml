@@ -16,7 +16,14 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
+        <ImageView
+            android:id="@+id/back"
+            android:src="@drawable/round_arrow_back_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <TextView
+            android:layout_marginStart="10dp"
             android:id="@+id/appbarText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -292,63 +299,9 @@
         </RadioGroup>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:background="@drawable/dotted_bg"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:src="@drawable/baseline_cloud_upload_24"
-            android:layout_height="wrap_content"/>
-        <EditText
-            android:id="@+id/publication"
-            android:textAlignment="center"
-            android:hint="Enter Publications name"
-            android:background="@drawable/edit_text_bg"
-            android:textColorHint="@color/hint"
-            android:layout_width="match_parent"
-            android:padding="8dp"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_marginTop="5dp"
-            android:drawablePadding="5dp"
-            android:drawableStart="@drawable/pdf_logo"
-            android:id="@+id/pdf_path"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/new_book_pdf"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/selected"
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:padding="5dp"
-        android:text="Browse files" />
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -356,6 +309,6 @@
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/selected"
         android:padding="5dp"
-        android:text="Submit" />
+        android:text="Next" />
 
 </LinearLayout>

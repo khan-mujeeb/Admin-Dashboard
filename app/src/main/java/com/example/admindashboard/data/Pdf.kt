@@ -6,5 +6,6 @@ data class Pdf(
     val downloadUrl: String?,
     var senderName: String = "",
     var date: String = "",
-    var time: String = ""
+    var time: String = "",
+    var publication: String = ""
 )
