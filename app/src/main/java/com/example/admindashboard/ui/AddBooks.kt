@@ -23,7 +23,6 @@ class AddBooks : AppCompatActivity() {
     var binding: ActivityAddBooksBinding? = null
 
 
-
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -40,8 +39,6 @@ class AddBooks : AppCompatActivity() {
 
         from = intent.getStringExtra("from")!!
 
-
-
         setYearViewGroup()
         setSemViewGroup()
 
@@ -50,41 +47,41 @@ class AddBooks : AppCompatActivity() {
         binding!!.next.setOnClickListener {
 
             val intent = Intent(this, UploadActivity::class.java)
-            var flag: Boolean = true
-            if (year.isNotEmpty()){
+            var flag = true
+            if (year.isNotEmpty()) {
                 var flag: Boolean = true
                 intent.putExtra("year", year)
-            }else {
-                Toast.makeText(this, "select year",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "select year", Toast.LENGTH_SHORT).show()
                 flag = false
             }
 
             if (department.isNotEmpty()) {
-                var flag: Boolean = true
+                var flag = true
                 intent.putExtra("department", department)
-            }else {
-                Toast.makeText(this, "select department",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "select department", Toast.LENGTH_SHORT).show()
                 flag = false
             }
 
             if (semester.isNotEmpty()) {
-                var flag: Boolean = true
+                var flag = true
                 intent.putExtra("sem", semester)
-            }else {
+            } else {
                 flag = false
-                Toast.makeText(this, "select sem",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "select sem", Toast.LENGTH_SHORT).show()
             }
 
-            if (subject.isNotEmpty()){
+            if (subject.isNotEmpty()) {
                 var flag: Boolean = true
                 intent.putExtra("subject", subject)
-            }else {
+            } else {
                 flag = false
-                Toast.makeText(this, "select subject ",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "select subject ", Toast.LENGTH_SHORT).show()
             }
 
-            if(flag) {
-                intent.putExtra("heading","Upload")
+            if (flag) {
+                intent.putExtra("heading", "Upload")
                 startActivity(intent)
             }
 
@@ -97,22 +94,16 @@ class AddBooks : AppCompatActivity() {
     // upload books / pyq
 
 
-
-
-
     private fun setSemViewGroup() {
         binding!!.semesterRadioGrp.setOnCheckedChangeListener { _, checkedId ->
-//            checkedId == binding!!.one.id || checkedId == binding!!.two.id ||
             if (
                 checkedId == binding!!.three.id || checkedId == binding!!.four.id ||
                 checkedId == binding!!.five.id || checkedId == binding!!.six.id ||
                 checkedId == binding!!.seven.id || checkedId == binding!!.eight.id
             ) {
-//                checkSem(binding!!.one, binding!!.two, 1, 2)
                 checkSem(binding!!.three, binding!!.four, 3, 4)
                 checkSem(binding!!.five, binding!!.six, 5, 6)
                 checkSem(binding!!.seven, binding!!.eight, 7, 8)
-//                binding!!.subject.visibility = View.VISIBLE
             }
         }
     }
@@ -121,11 +112,6 @@ class AddBooks : AppCompatActivity() {
         binding!!.yearRadioGrp.setOnCheckedChangeListener { group, checkedId ->
 
             when (checkedId) {
-//                binding!!.fe.id -> {
-//                    Toast.makeText(this, "1st year", Toast.LENGTH_SHORT).show()
-//                    setContent(1)
-//                    year = "first_year"
-//                }
 
                 binding!!.se.id -> {
                     Toast.makeText(this, "2nd year", Toast.LENGTH_SHORT).show()
@@ -150,15 +136,8 @@ class AddBooks : AppCompatActivity() {
     }
 
 
-
-
-
-
-
     private fun setContent(i: Int) {
         binding!!.sem.visibility = View.VISIBLE
-//        binding!!.one.visibility = View.GONE
-//        binding!!.two.visibility = View.GONE
         binding!!.three.visibility = View.GONE
         binding!!.four.visibility = View.GONE
         binding!!.five.visibility = View.GONE
@@ -167,15 +146,13 @@ class AddBooks : AppCompatActivity() {
         binding!!.eight.visibility = View.GONE
 
         when (i) {
-//            1 -> {
-//                binding!!.one.visibility = View.VISIBLE
-//                binding!!.two.visibility = View.VISIBLE
-//            }
+
             2 -> {
 
                 binding!!.three.visibility = View.VISIBLE
                 binding!!.four.visibility = View.VISIBLE
             }
+
             3 -> {
                 binding!!.five.visibility = View.VISIBLE
                 binding!!.six.visibility = View.VISIBLE
@@ -240,26 +217,9 @@ class AddBooks : AppCompatActivity() {
                 word = "six"
                 if (from != "pyq") {
                     //                semSixSubject()
-                    setSemesterData(
-                        "Computer Network and Security",
-                        "Data Science and Big Data Analytics",
-                        "Web Application Development",
-                        "Elective-II",
-                        "",
-                        0, 0, 0, 0, 1
-
-                    )
+                    semSixSubject()
                     binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-//                    semSixSubject()
-                        setSemesterData(
-                            "Computer Network and Security",
-                            "Data Science and Big Data Analytics",
-                            "Web Application Development",
-                            "Elective-II",
-                            "",
-                            0, 0, 0, 0, 1
-
-                        )
+                        semSixSubject()
                     }
                 }
 
@@ -268,12 +228,18 @@ class AddBooks : AppCompatActivity() {
                 word = "seventh"
                 if (from != "pyq") {
                     semSeventhSubject()
+                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                        semSeventhSubject()
+                    }
                 }
             }
             8 -> {
                 word = "eight"
                 if (from != "pyq") {
                     semEightSubject()
+                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
+                        semEightSubject()
+                    }
                 }
             }
         }

@@ -258,4 +258,10 @@ class UploadActivity : AppCompatActivity() {
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (binding != null) {
+            binding = null
+        }
+    }
 }// end of class
