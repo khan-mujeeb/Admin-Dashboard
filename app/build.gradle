@@ -39,9 +39,6 @@ android {
 
 dependencies {
 
-    //gif image
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
-
     //firebase
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:31.2.2')

@@ -7,6 +7,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Log
@@ -36,6 +37,7 @@ class UploadActivity : AppCompatActivity() {
     var semester: String = ""
     var subject: String = ""
     var publication: String = ""
+    var displayName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,24 +60,30 @@ class UploadActivity : AppCompatActivity() {
 
         // reading pdf file
         binding!!.browseFile.setOnClickListener {
-            onUploadClick()
+            onBrowseClick()
+
         }
 
         binding!!.submit.setOnClickListener {
 
             publication = binding!!.publication.text.toString()
 
-            if (publication.isNotEmpty()) {
-                uploadPdfToFirebaseStorage(uriValue)
-            } else {
+            if (publication.isEmpty()) {
                 Toast.makeText(this, "Enter Publication", Toast.LENGTH_SHORT).show()
+            } else if(displayName.isEmpty()) {
+                Toast.makeText(this, "select file to upload", Toast.LENGTH_SHORT).show()
+            }else {
+                uploadPdfToFirebaseStorage(uriValue)
             }
         }
     }
 
 
-    private fun onUploadClick() {
+    private fun onBrowseClick() {
 
+        if(Build.VERSION.RELEASE.toInt() >= 13) {
+            pickPdfFile()
+        }
         // permission
         if (
             ActivityCompat.checkSelfPermission(
@@ -94,6 +102,8 @@ class UploadActivity : AppCompatActivity() {
             // when permission granted
             pickPdfFile()
         }
+
+
 
     }
 
@@ -136,7 +146,7 @@ class UploadActivity : AppCompatActivity() {
                 val cursor = contentResolver.query(uri, null, null, null, null)
                 cursor?.use {
                     it.moveToFirst()
-                    val displayName = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                    displayName = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                     binding?.pdfPath?.text = displayName
                 }
             }
@@ -246,8 +256,8 @@ class UploadActivity : AppCompatActivity() {
             name,
             currentDate,
             currentTime,
-            publication
-
+            publication,
+            displayName
         )
 
         pdfId.let {
@@ -255,6 +265,8 @@ class UploadActivity : AppCompatActivity() {
         }
         dialog.dismiss()
         Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
 

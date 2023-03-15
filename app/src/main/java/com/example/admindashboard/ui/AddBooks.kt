@@ -91,9 +91,6 @@ class AddBooks : AppCompatActivity() {
 
     }
 
-    // upload books / pyq
-
-
     private fun setSemViewGroup() {
         binding!!.semesterRadioGrp.setOnCheckedChangeListener { _, checkedId ->
             if (

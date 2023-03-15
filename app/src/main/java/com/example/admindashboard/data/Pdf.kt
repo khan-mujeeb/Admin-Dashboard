@@ -7,5 +7,6 @@ data class Pdf(
     var senderName: String = "",
     var date: String = "",
     var time: String = "",
-    var publication: String = ""
+    var publication: String = "",
+    var fileName: String = ""
 )
