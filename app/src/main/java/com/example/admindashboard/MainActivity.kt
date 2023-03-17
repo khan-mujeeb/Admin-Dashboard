@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.admindashboard.databinding.ActivityMainBinding
 import com.example.admindashboard.ui.AddBooks
+import com.example.admindashboard.ui.ControlPanelActivity
 import com.example.admindashboard.ui.NotifficationActivity
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,14 @@ class MainActivity : AppCompatActivity() {
             intent2.putExtra("from", "pyq")
             startActivity(intent2)
         }
+
+        // go to control panel
+        binding!!.controlPanel.setOnClickListener {
+            val intent2 = Intent(this, ControlPanelActivity::class.java)
+            intent2.putExtra("heading", "Control Panel")
+            startActivity(intent2)
+        }
+
     }
 
 }

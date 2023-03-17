@@ -19,12 +19,15 @@
         android:theme="@style/Theme.AdminDashboard"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ControlPanelActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.UploadActivity"
             android:exported="false" />
         <activity
             android:name=".ui.NotifficationActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Translucent"></activity>
+            android:theme="@style/Theme.AppCompat.Translucent" />
         <activity
             android:name=".ui.LoginActivity"
             android:exported="true">

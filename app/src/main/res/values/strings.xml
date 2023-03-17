@@ -10,7 +10,7 @@
     <string name="passwordHint">********</string>
     <string name="login">Login</string>
     <string name="please_wait">Please Wait...</string>
-    <string name="placement_assistant">Placement Assistant</string>
+    <string name="placement_assistant">Control Panel</string>
     <string name="dashboard">Dashboard</string>
     <string name="book">book</string>
     <string name="display_notification">Display Notification</string>
@@ -18,4 +18,5 @@
     <string name="upload">Upload</string>
     <string name="browse_files">Browse files</string>
     <string name="enter_publications_name">Enter Publications name</string>
+    <string name="notification">Notification</string>
 </resources>
