@@ -44,16 +44,12 @@ class UploadActivity : AppCompatActivity() {
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
+        variableInit()
+        subscribeClickEvents()
 
+    }
 
-        year = intent.getStringExtra("year")!!
-        department = intent.getStringExtra("department")!!
-        semester = intent.getStringExtra("sem")!!
-        subject = intent.getStringExtra("subject")!!
-        auth = Firebase.auth
-
-        val heading = intent.getStringExtra("heading")
-        binding!!.appbarText.text = heading
+    private fun subscribeClickEvents() {
         binding!!.back.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -61,13 +57,10 @@ class UploadActivity : AppCompatActivity() {
         // reading pdf file
         binding!!.browseFile.setOnClickListener {
             onBrowseClick()
-
         }
 
         binding!!.submit.setOnClickListener {
-
             publication = binding!!.publication.text.toString()
-
             if (publication.isEmpty()) {
                 Toast.makeText(this, "Enter Publication", Toast.LENGTH_SHORT).show()
             } else if(displayName.isEmpty()) {
@@ -76,6 +69,16 @@ class UploadActivity : AppCompatActivity() {
                 uploadPdfToFirebaseStorage(uriValue)
             }
         }
+    }
+
+    private fun variableInit() {
+        year = intent.getStringExtra("year")!!
+        department = intent.getStringExtra("department")!!
+        semester = intent.getStringExtra("sem")!!
+        subject = intent.getStringExtra("subject")!!
+        auth = Firebase.auth
+        val heading = intent.getStringExtra("heading")
+        binding!!.appbarText.text = heading
     }
 
 

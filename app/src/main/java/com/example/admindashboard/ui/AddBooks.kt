@@ -18,8 +18,6 @@ class AddBooks : AppCompatActivity() {
     var semester: String = ""
     var subject: String = ""
     var from: String = ""
-
-
     var binding: ActivityAddBooksBinding? = null
 
 
@@ -31,64 +29,70 @@ class AddBooks : AppCompatActivity() {
         binding = ActivityAddBooksBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
-        val heading = intent.getStringExtra("heading")
-        binding!!.appbarText.text = heading
+        variableInit()
+        subscribeClickListner()
+        setYearViewGroup()
+        setSemViewGroup()
+
+    }
+
+    private fun subscribeClickListner() {
+
         binding!!.back.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
-        from = intent.getStringExtra("from")!!
-
-        setYearViewGroup()
-        setSemViewGroup()
-
-
-
         binding!!.next.setOnClickListener {
-
-            val intent = Intent(this, UploadActivity::class.java)
-            var flag = true
-            if (year.isNotEmpty()) {
-                var flag: Boolean = true
-                intent.putExtra("year", year)
-            } else {
-                Toast.makeText(this, "select year", Toast.LENGTH_SHORT).show()
-                flag = false
-            }
-
-            if (department.isNotEmpty()) {
-                var flag = true
-                intent.putExtra("department", department)
-            } else {
-                Toast.makeText(this, "select department", Toast.LENGTH_SHORT).show()
-                flag = false
-            }
-
-            if (semester.isNotEmpty()) {
-                var flag = true
-                intent.putExtra("sem", semester)
-            } else {
-                flag = false
-                Toast.makeText(this, "select sem", Toast.LENGTH_SHORT).show()
-            }
-
-            if (subject.isNotEmpty()) {
-                var flag: Boolean = true
-                intent.putExtra("subject", subject)
-            } else {
-                flag = false
-                Toast.makeText(this, "select subject ", Toast.LENGTH_SHORT).show()
-            }
-
-            if (flag) {
-                intent.putExtra("heading", "Upload")
-                startActivity(intent)
-            }
-
-
+            goToNextActivity()
         }
 
+    }
 
+    private fun goToNextActivity() {
+        val intent = Intent(this, UploadActivity::class.java)
+        var flag = true
+        if (year.isNotEmpty()) {
+            var flag: Boolean = true
+            intent.putExtra("year", year)
+        } else {
+            Toast.makeText(this, "select year", Toast.LENGTH_SHORT).show()
+            flag = false
+        }
+
+        if (department.isNotEmpty()) {
+            var flag = true
+            intent.putExtra("department", department)
+        } else {
+            Toast.makeText(this, "select department", Toast.LENGTH_SHORT).show()
+            flag = false
+        }
+
+        if (semester.isNotEmpty()) {
+            var flag = true
+            intent.putExtra("sem", semester)
+        } else {
+            flag = false
+            Toast.makeText(this, "select sem", Toast.LENGTH_SHORT).show()
+        }
+
+        if (subject.isNotEmpty()) {
+            var flag: Boolean = true
+            intent.putExtra("subject", subject)
+        } else {
+            flag = false
+            Toast.makeText(this, "select subject ", Toast.LENGTH_SHORT).show()
+        }
+
+        if (flag) {
+            intent.putExtra("heading", "Upload")
+            startActivity(intent)
+        }
+    }
+
+    private fun variableInit() {
+        val heading = intent.getStringExtra("heading")
+        binding!!.appbarText.text = heading
+        from = intent.getStringExtra("from")!!
     }
 
     private fun setSemViewGroup() {
