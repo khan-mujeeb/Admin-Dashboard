@@ -48,46 +48,36 @@ class AddBooks : AppCompatActivity() {
 
     }
 
+
     private fun goToNextActivity() {
-        val intent = Intent(this, UploadActivity::class.java)
-        var flag = true
-        if (year.isNotEmpty()) {
-            var flag: Boolean = true
+        if (year.isNotEmpty() && department.isNotEmpty() && semester.isNotEmpty()) {
+            val intent = Intent(this, UploadActivity::class.java)
             intent.putExtra("year", year)
-        } else {
-            Toast.makeText(this, "select year", Toast.LENGTH_SHORT).show()
-            flag = false
-        }
-
-        if (department.isNotEmpty()) {
-            var flag = true
             intent.putExtra("department", department)
-        } else {
-            Toast.makeText(this, "select department", Toast.LENGTH_SHORT).show()
-            flag = false
-        }
-
-        if (semester.isNotEmpty()) {
-            var flag = true
             intent.putExtra("sem", semester)
-        } else {
-            flag = false
-            Toast.makeText(this, "select sem", Toast.LENGTH_SHORT).show()
-        }
-
-        if (subject.isNotEmpty()) {
-            var flag: Boolean = true
-            intent.putExtra("subject", subject)
-        } else {
-            flag = false
-            Toast.makeText(this, "select subject ", Toast.LENGTH_SHORT).show()
-        }
-
-        if (flag) {
             intent.putExtra("heading", "Upload")
+            intent.putExtra("from", from)
+
+            if (from != "pyq") {
+                if (subject.isNotEmpty()) {
+                    intent.putExtra("subject", subject)
+                }else if (subject.isEmpty()) {
+                    Toast.makeText(this, "select subject", Toast.LENGTH_SHORT).show()
+                }
+
+            }
             startActivity(intent)
+        } else {
+            if (year.isEmpty()) {
+                Toast.makeText(this, "select year", Toast.LENGTH_SHORT).show()
+            } else if (department.isEmpty()) {
+                Toast.makeText(this, "select department", Toast.LENGTH_SHORT).show()
+            } else if (semester.isEmpty()) {
+                Toast.makeText(this, "select sem", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
 
     private fun variableInit() {
         val heading = intent.getStringExtra("heading")
@@ -96,6 +86,7 @@ class AddBooks : AppCompatActivity() {
     }
 
     private fun setSemViewGroup() {
+
         binding!!.semesterRadioGrp.setOnCheckedChangeListener { _, checkedId ->
             if (
                 checkedId == binding!!.three.id || checkedId == binding!!.four.id ||
