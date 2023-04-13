@@ -19,4 +19,7 @@
     <string name="browse_files">Browse files</string>
     <string name="enter_publications_name">Enter Publications name</string>
     <string name="notification">Notification</string>
+    <string name="enter_notification">Enter Notification</string>
+    <string name="push">Push</string>
+    <string name="enter_title">Enter Title</string>
 </resources>

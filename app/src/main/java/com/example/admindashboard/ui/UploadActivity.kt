@@ -11,12 +11,15 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.admindashboard.FirebaseUtils
 import com.example.admindashboard.MainActivity
 import com.example.admindashboard.R
+import com.example.admindashboard.data.PYQ
 import com.example.admindashboard.data.Pdf
 import com.example.admindashboard.databinding.ActivityUploadBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -28,10 +31,12 @@ import java.util.*
 
 class UploadActivity : AppCompatActivity() {
     var binding: ActivityUploadBinding? = null
-
+    lateinit var from: String
     private var uriValue: Uri? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var dialog: AlertDialog
+    var exam: String = ""
+    var yearOfExam: String = ""
     var year: String = ""
     var department: String = ""
     var semester: String = ""
@@ -45,8 +50,26 @@ class UploadActivity : AppCompatActivity() {
         setContentView(binding!!.root)
 
         variableInit()
+        subscribeUi()
         subscribeClickEvents()
 
+    }
+
+    private fun subscribeUi() {
+        when (from) {
+            "pyq" -> {
+                binding!!.publication.hint = "Enter Examination"
+                binding!!.publication.visibility = View.GONE
+                binding!!.yearOfExam.visibility = View.VISIBLE
+                binding!!.exam.visibility = View.VISIBLE
+            }
+            else -> {
+                binding!!.publication.hint = getString(R.string.enter_publications_name)
+                binding!!.yearOfExam.visibility = View.GONE
+
+                binding!!.exam.visibility = View.GONE
+            }
+        }
     }
 
     private fun subscribeClickEvents() {
@@ -61,17 +84,23 @@ class UploadActivity : AppCompatActivity() {
 
         binding!!.submit.setOnClickListener {
             publication = binding!!.publication.text.toString()
-            if (publication.isEmpty()) {
+            exam = binding!!.exam.text.toString()
+            yearOfExam = binding!!.yearOfExam.text.toString()
+
+            if (publication.isEmpty() && from != "pyq") {
                 Toast.makeText(this, "Enter Publication", Toast.LENGTH_SHORT).show()
-            } else if(displayName.isEmpty()) {
+            } else if (displayName.isEmpty()) {
                 Toast.makeText(this, "select file to upload", Toast.LENGTH_SHORT).show()
-            }else {
+            } else if (exam.isEmpty() && yearOfExam.isEmpty() && from == "pyq") {
+                Toast.makeText(this, "enter all pyq details", Toast.LENGTH_SHORT).show()
+            } else {
                 uploadPdfToFirebaseStorage(uriValue)
             }
         }
     }
 
     private fun variableInit() {
+        from = intent.getStringExtra("from")!!
         year = intent.getStringExtra("year")!!
         department = intent.getStringExtra("department")!!
         semester = intent.getStringExtra("sem")!!
@@ -84,7 +113,7 @@ class UploadActivity : AppCompatActivity() {
 
     private fun onBrowseClick() {
 
-        if(Build.VERSION.RELEASE.toInt() >= 13) {
+        if (Build.VERSION.RELEASE.toInt() >= 13) {
             pickPdfFile()
         }
         // permission
@@ -105,7 +134,6 @@ class UploadActivity : AppCompatActivity() {
             // when permission granted
             pickPdfFile()
         }
-
 
 
     }
@@ -162,14 +190,7 @@ class UploadActivity : AppCompatActivity() {
         val storageRef = FirebaseStorage.getInstance().reference
         val pdfRef = storageRef.child("books/${uriValue!!.lastPathSegment}")
         val uploadTask = pdfRef.putFile(uriValue)
-        uploadTask.addOnProgressListener { taskSnapShot ->
-            val progress = ((100.00 * taskSnapShot.bytesTransferred) / taskSnapShot.totalByteCount)
-            Log.d(ContentValues.TAG, "progress is $progress")
-//            val message = findViewById<TextView>(Build.VERSION_CODES.R.id.message)
-//            dialog.setCustomTitle(message)
-
-
-        }.addOnSuccessListener {
+        uploadTask.addOnSuccessListener {
             // Get the download URL of the PDF file and save it to Firebase Realtime Database
             pdfRef.downloadUrl.addOnSuccessListener { downloadUri ->
                 savePdfDownloadUrlToFirebaseRealtimeDatabase(downloadUri.toString())
@@ -181,12 +202,9 @@ class UploadActivity : AppCompatActivity() {
 
     @SuppressLint("InflateParams")
     private fun startLoadingScreen() {
-//        val message = findViewById<TextView>(Build.VERSION_CODES.R.id.message)
-
         val builder = AlertDialog.Builder(this)
         builder.setView(layoutInflater.inflate(R.layout.loading_screen, null))
         builder.setCancelable(false)
-//        message.text = progress.toString()
         dialog = builder.create()
         dialog.show()
     }
@@ -212,35 +230,25 @@ class UploadActivity : AppCompatActivity() {
         val name = "${list[0]} ${list[1]}"
 
 
-//        if (from == "pyq") {
-//
-//            val database = FirebaseDatabase.getInstance().getReference("pyq")
-//            val key = database.push().key.toString()
-//
-//            val databaseRef = database
-//                .child(department)
-//                .child(year)
-//                .child("${semester}_sem")
-//                .child(key)
-//
-//            val pdfId = subject
-//
-//            val pdf = Pdf(
-//                key!!,
-//                pdfId,
-//                downloadUrl,
-//                name,
-//                currentDate,
-//                currentTime
-//            )
-//
-//            pdfId.let {
-//                databaseRef.setValue(pdf)
-//            }
-//
-//        } else {
+        when (from) {
+            "pyq" -> {
+                uploadPYQ(name, currentDate, currentTime, downloadUrl, publication)
+            }
+            "add_books" -> {
+                uploadBooks(publication, currentDate, currentTime, downloadUrl, name)
+            }
+        }
 
-        val database = FirebaseDatabase.getInstance().getReference("books")
+    }
+
+    private fun uploadBooks(
+        publication: String,
+        currentDate: String,
+        currentTime: String,
+        downloadUrl: String,
+        name: String
+    ) {
+        val database = FirebaseUtils.bookRef
         val key = database.push().key.toString()
 
         val databaseRef = database
@@ -266,10 +274,44 @@ class UploadActivity : AppCompatActivity() {
         pdfId.let {
             databaseRef.setValue(pdf)
         }
-        dialog.dismiss()
-        Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        onuploadSuccessful()
+    }
+
+    private fun uploadPYQ(
+        name: String,
+        currentDate: String,
+        currentTime: String,
+        downloadUrl: String,
+        publication: String
+    ) {
+        val database = FirebaseUtils.pyqRef
+        val key = database.push().key.toString()
+
+        val databaseRef = database
+            .child(department)
+            .child(year)
+            .child("${semester}_sem")
+            .child(subject)
+            .child(key)
+
+        val pdfId = subject
+
+        val pdf = PYQ(
+            key!!,
+            downloadUrl,
+            name,
+            currentDate,
+            currentTime,
+            yearOfExam,
+            exam,
+            subject
+        )
+
+        pdfId.let {
+            databaseRef.setValue(pdf)
+        }
+
+        onuploadSuccessful()
     }
 
 
@@ -278,5 +320,12 @@ class UploadActivity : AppCompatActivity() {
         if (binding != null) {
             binding = null
         }
+    }
+
+    fun onuploadSuccessful() {
+        dialog.dismiss()
+        Toast.makeText(this, "Uploaded", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }// end of class

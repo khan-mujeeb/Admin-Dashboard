@@ -6,5 +6,7 @@ data class PYQ(
     var senderName: String = "",
     var date: String = "",
     var time: String = "",
-    var publication: String = ""
+    var year: String = "",
+    var exam: String = "",
+    var subject: String
 )

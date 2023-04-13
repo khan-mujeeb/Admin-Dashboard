@@ -50,22 +50,14 @@ class AddBooks : AppCompatActivity() {
 
 
     private fun goToNextActivity() {
-        if (year.isNotEmpty() && department.isNotEmpty() && semester.isNotEmpty()) {
+        if (year.isNotEmpty() && department.isNotEmpty() && semester.isNotEmpty() && subject.isNotEmpty()) {
             val intent = Intent(this, UploadActivity::class.java)
             intent.putExtra("year", year)
             intent.putExtra("department", department)
             intent.putExtra("sem", semester)
             intent.putExtra("heading", "Upload")
             intent.putExtra("from", from)
-
-            if (from != "pyq") {
-                if (subject.isNotEmpty()) {
-                    intent.putExtra("subject", subject)
-                }else if (subject.isEmpty()) {
-                    Toast.makeText(this, "select subject", Toast.LENGTH_SHORT).show()
-                }
-
-            }
+            intent.putExtra("subject", subject)
             startActivity(intent)
         } else {
             if (year.isEmpty()) {
@@ -74,6 +66,8 @@ class AddBooks : AppCompatActivity() {
                 Toast.makeText(this, "select department", Toast.LENGTH_SHORT).show()
             } else if (semester.isEmpty()) {
                 Toast.makeText(this, "select sem", Toast.LENGTH_SHORT).show()
+            } else if (subject.isEmpty()) {
+                Toast.makeText(this, "select subject", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -171,105 +165,48 @@ class AddBooks : AppCompatActivity() {
 
             3 -> {
                 word = "third"
-
-
-                if (from != "pyq") {
+                semThreeSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                     semThreeSubject()
-                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-                        semThreeSubject()
-                    }
                 }
-
-
             }
             4 -> {
                 word = "fourth"
-
-                if (from != "pyq") {
+                semFourthSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                     semFourthSubject()
-                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-                        semFourthSubject()
-                    }
                 }
-
-
             }
             5 -> {
                 word = "fifth"
-
-                if (from != "pyq") {
+                semFiveSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                     semFiveSubject()
-                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-                        semFiveSubject()
-                    }
                 }
-
             }
             6 -> {
                 word = "six"
-                if (from != "pyq") {
-                    //                semSixSubject()
+                semSixSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                     semSixSubject()
-                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-                        semSixSubject()
-                    }
                 }
-
             }
             7 -> {
                 word = "seventh"
-                if (from != "pyq") {
+                semSeventhSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                     semSeventhSubject()
-                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-                        semSeventhSubject()
-                    }
                 }
             }
             8 -> {
                 word = "eight"
-                if (from != "pyq") {
+                semEightSubject()
+                binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
                     semEightSubject()
-                    binding!!.subjectLayout.setOnCheckedChangeListener { _, _ ->
-                        semEightSubject()
-                    }
                 }
             }
         }
         return word
-    }
-
-    private fun setSemesterData(
-        s: String,
-        s1: String,
-        s2: String,
-        s3: String,
-        s4: String,
-        i: Int,
-        i1: Int,
-        i2: Int,
-        i3: Int,
-        i4: Int
-    ) {
-        binding!!.subjectLayoutView.visibility = View.VISIBLE
-        setSubjectVisiblity(binding!!.subj1, i)
-        setSubjectVisiblity(binding!!.subj2, i1)
-        setSubjectVisiblity(binding!!.subj3, i2)
-        setSubjectVisiblity(binding!!.subj4, i3)
-        setSubjectVisiblity(binding!!.subj5, i4)
-
-        setSubjectData(binding!!.subj1, s)
-        setSubjectData(binding!!.subj2, s1)
-        setSubjectData(binding!!.subj3, s2)
-        setSubjectData(binding!!.subj4, s3)
-        setSubjectData(binding!!.subj5, s4)
-    }
-
-    private fun setSubjectVisiblity(subj: RadioButton, i: Int) {
-        if (i == 1) {
-            subj.visibility = View.INVISIBLE
-        } else {
-            subj.visibility = View.VISIBLE
-        }
     }
 
     private fun semSixSubject() {
