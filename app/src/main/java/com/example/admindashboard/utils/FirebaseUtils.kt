@@ -1,4 +1,4 @@
-package com.example.admindashboard
+package com.example.admindashboard.utils
 
 import com.google.firebase.database.FirebaseDatabase
 

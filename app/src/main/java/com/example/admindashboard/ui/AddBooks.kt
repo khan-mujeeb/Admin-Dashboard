@@ -46,6 +46,33 @@ class AddBooks : AppCompatActivity() {
             goToNextActivity()
         }
 
+        binding!!.manage.setOnClickListener {
+            goToControlPanel()
+        }
+
+    }
+
+    private fun goToControlPanel() {
+        if (year.isNotEmpty() && department.isNotEmpty() && semester.isNotEmpty() && subject.isNotEmpty()) {
+            val intent = Intent(this, ControlPanelActivity::class.java)
+            intent.putExtra("year", year)
+            intent.putExtra("department", department)
+            intent.putExtra("sem", semester)
+            intent.putExtra("heading", "Upload")
+            intent.putExtra("from", from)
+            intent.putExtra("subject", subject)
+            startActivity(intent)
+        } else {
+            if (year.isEmpty()) {
+                Toast.makeText(this, "select year", Toast.LENGTH_SHORT).show()
+            } else if (department.isEmpty()) {
+                Toast.makeText(this, "select department", Toast.LENGTH_SHORT).show()
+            } else if (semester.isEmpty()) {
+                Toast.makeText(this, "select sem", Toast.LENGTH_SHORT).show()
+            } else if (subject.isEmpty()) {
+                Toast.makeText(this, "select subject", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 

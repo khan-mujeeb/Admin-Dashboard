@@ -18,15 +18,15 @@
 
         <ImageView
             android:id="@+id/back"
-            android:src="@drawable/round_arrow_back_24"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/round_arrow_back_24" />
 
         <TextView
-            android:layout_marginStart="10dp"
             android:id="@+id/appbarText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="@string/dashboard"
             android:textColor="@color/black"
             android:textSize="26sp"
@@ -301,15 +301,27 @@
 
 
     <Button
-        android:layout_marginTop="10dp"
         android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/selected"
         android:padding="5dp"
-        android:text="Next" />
+        android:text="Upload" />
+
+    <Button
+        android:id="@+id/manage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/selected"
+        android:padding="5dp"
+        android:text="Manage" />
 
 </LinearLayout>
