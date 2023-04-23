@@ -20,6 +20,7 @@ import com.example.admindashboard.R
 import com.example.admindashboard.data.PYQ
 import com.example.admindashboard.data.Pdf
 import com.example.admindashboard.databinding.ActivityUploadBinding
+import com.example.admindashboard.utils.FunctionUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -53,7 +54,7 @@ class UploadActivity : AppCompatActivity() {
     }
 
     private fun subscribeUi() {
-        binding!!.subjectName.text = subject
+        binding!!.dir.text = "sem ${FunctionUtils.semesterNameToNumber(semester)} / $subject"
 
         when (from) {
             "pyq" -> {

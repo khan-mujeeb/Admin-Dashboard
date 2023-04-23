@@ -14,6 +14,7 @@ import com.example.admindashboard.data.Pdf
 import com.example.admindashboard.databinding.ActivityControlPanelBinding
 import com.example.admindashboard.utils.FirebaseUtils.bookRef
 import com.example.admindashboard.utils.FirebaseUtils.pyqRef
+import com.example.admindashboard.utils.FunctionUtils.semesterNameToNumber
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -50,6 +51,7 @@ class ControlPanelActivity : AppCompatActivity() {
 
     fun subscribeUi() {
         binding!!.appbarText.text = heading
+        binding!!.dir.text = "sem ${semesterNameToNumber(semester)} / $subject"
 
         val ref = if (from == "pyq") pyqRef else bookRef
 
