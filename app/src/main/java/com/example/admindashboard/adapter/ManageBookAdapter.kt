@@ -19,7 +19,7 @@ class ManageBookAdapter(
     val department: String,
     val year: String,
     val semester: String,
-    val subject: String
+    val subject: String,
 ) : RecyclerView.Adapter<ManageBookAdapter.PdfViewHolder>() {
 
     class PdfViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

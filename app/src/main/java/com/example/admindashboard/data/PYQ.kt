@@ -9,4 +9,6 @@ data class PYQ(
     var year: String = "",
     var exam: String = "",
     var subject: String
-)
+) {
+    constructor(): this("", "","", "", "" ,"","","")
+}

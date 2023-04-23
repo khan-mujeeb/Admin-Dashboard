@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/loginScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".account.LoginActivity">
 
     <TextView
+        android:textColor="@color/black"
         android:fontFamily="@font/poppins"
         android:textStyle="bold"
         android:layout_width="wrap_content"
@@ -17,6 +18,7 @@
         android:textSize="36sp" />
 
     <TextView
+        android:textColor="@color/black"
         android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,6 +27,7 @@
         android:textSize="26sp" />
 
     <TextView
+        android:textColor="@color/black"
         android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,6 +36,9 @@
         android:textSize="16sp" />
 
     <EditText
+        android:background="@drawable/edit_text_bg"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint"
         android:fontFamily="@font/poppins"
         android:id="@+id/email"
         android:layout_width="match_parent"
@@ -43,6 +49,7 @@
         android:padding="10dp" />
 
     <TextView
+        android:textColor="@color/black"
         android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,6 +58,9 @@
         android:textSize="16sp" />
 
     <EditText
+        android:background="@drawable/edit_text_bg"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint"
         android:fontFamily="@font/poppins"
         android:id="@+id/password"
         android:layout_width="match_parent"
@@ -61,6 +71,7 @@
         android:padding="10dp" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:fontFamily="@font/poppins"
         android:background="@drawable/btn_bg"
         android:backgroundTint="@color/selected"
         android:id="@+id/loginBtn"

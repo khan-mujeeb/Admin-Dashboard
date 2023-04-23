@@ -23,6 +23,7 @@
             android:src="@drawable/round_arrow_back_24" />
 
         <TextView
+
             android:fontFamily="@font/poppins"
             android:id="@+id/appbarText"
             android:layout_width="wrap_content"
@@ -54,6 +55,7 @@
             android:paddingBottom="5dp">
 
             <TextView
+                android:fontFamily="@font/poppins"
                 android:layout_marginVertical="8dp"
                 android:id="@+id/subjectName"
                 android:layout_width="match_parent"
@@ -69,6 +71,7 @@
                 android:src="@drawable/baseline_cloud_upload_24" />
 
             <TextView
+                android:fontFamily="@font/poppins"
                 android:id="@+id/pdf_path"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,6 +109,7 @@
 
 
         <EditText
+            android:fontFamily="@font/poppins"
             android:id="@+id/exam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,8 +145,8 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/browseFile"
             android:fontFamily="@font/poppins"
+            android:id="@+id/browseFile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -155,6 +159,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:fontFamily="@font/poppins"
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,7 +167,6 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btn_bg"
-            android:fontFamily="@font/poppins"
             android:backgroundTint="@color/selected"
             android:padding="5dp"
 

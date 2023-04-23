@@ -8,15 +8,19 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.admindashboard.MainActivity
 import com.example.admindashboard.R
 import com.example.admindashboard.adapter.ManageBookAdapter
+import com.example.admindashboard.adapter.ManagePyqAdapter
+import com.example.admindashboard.data.PYQ
 import com.example.admindashboard.data.Pdf
 import com.example.admindashboard.databinding.ActivityControlPanelBinding
 import com.example.admindashboard.utils.FirebaseUtils.bookRef
+import com.example.admindashboard.utils.FirebaseUtils.pyqRef
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class ControlPanelActivity : AppCompatActivity() {
@@ -38,42 +42,78 @@ class ControlPanelActivity : AppCompatActivity() {
         binding = ActivityControlPanelBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         variableInit()
-        subscribeUi()
         startLoadingScreen()
+        subscribeUi()
+
         subscribeOnClickEvent()
     }
 
     fun subscribeUi() {
         binding!!.appbarText.text = heading
 
-        bookRef.child(department)
+        val ref = if (from == "pyq") pyqRef else bookRef
+
+        dialog.show()
+        ref.child(department)
             .child(year)
             .child(semester + "_sem")
             .child(subject)
             .addValueEventListener(object : ValueEventListener {
 
                 val booksList = mutableListOf<Pdf>()
+                val pyqList = mutableListOf<PYQ>()
+
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    dialog.show()
                     booksList.clear()
+                    pyqList.clear()
                     for (item in snapshot.children) {
-                        val books = item.getValue(Pdf::class.java)!!
-                        booksList.add(books)
+                        if (from == "pyq") {
+                            val pyq = item.getValue(PYQ::class.java)!!
+                            pyqList.add(pyq)
+                        } else {
+                            val books = item.getValue(Pdf::class.java)!!
+                            booksList.add(books)
+                        }
+
                     }
                     println("mujeeb $department $year $semester$subject $booksList ")
-                    val adapter = ManageBookAdapter(
-                        booksList,
-                        this@ControlPanelActivity,
-                        department,
-                        year,
-                        semester,
-                        subject
-                    )
-                    dialog.dismiss()
-                    binding!!.manageRc.adapter = adapter
+                    if (from != "pyq") {
+                        val adapter = ManageBookAdapter(
+                            booksList,
+                            this@ControlPanelActivity,
+                            department,
+                            year,
+                            semester,
+                            subject
+                        )
 
-                    val itemTouchHelper = ItemTouchHelper(adapter.SwipeToDeleteCallback(adapter))
-                    itemTouchHelper.attachToRecyclerView(binding!!.manageRc)
+                        dialog.dismiss()
+                        binding!!.manageRc.adapter = adapter
+
+                        val itemTouchHelper =
+                            ItemTouchHelper(adapter.SwipeToDeleteCallback(adapter))
+                        itemTouchHelper.attachToRecyclerView(binding!!.manageRc)
+
+                    } else {
+                        val adapter = ManagePyqAdapter(
+                            pyqList,
+                            this@ControlPanelActivity,
+                            department,
+                            year,
+                            semester,
+                            subject
+                        )
+
+                        dialog.dismiss()
+                        binding!!.manageRc.adapter = adapter
+
+                        val itemTouchHelper =
+                            ItemTouchHelper(adapter.SwipeToDeleteCallback(adapter))
+                        itemTouchHelper.attachToRecyclerView(binding!!.manageRc)
+
+
+                    }
+
 
                 }
 
@@ -102,7 +142,6 @@ class ControlPanelActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
-
 
 
     fun startLoadingScreen() {
