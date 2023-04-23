@@ -19,6 +19,9 @@
         android:theme="@style/Theme.AdminDashboard"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ManageNotificationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ControlPanelActivity"
             android:exported="false" />
         <activity
@@ -69,6 +72,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

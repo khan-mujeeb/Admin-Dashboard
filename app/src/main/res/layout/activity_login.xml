@@ -9,6 +9,7 @@
     tools:context=".account.LoginActivity">
 
     <TextView
+        android:fontFamily="@font/poppins"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +17,7 @@
         android:textSize="36sp" />
 
     <TextView
+        android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -23,6 +25,7 @@
         android:textSize="26sp" />
 
     <TextView
+        android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -30,6 +33,7 @@
         android:textSize="16sp" />
 
     <EditText
+        android:fontFamily="@font/poppins"
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +43,7 @@
         android:padding="10dp" />
 
     <TextView
-
+        android:fontFamily="@font/poppins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -47,6 +51,7 @@
         android:textSize="16sp" />
 
     <EditText
+        android:fontFamily="@font/poppins"
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +60,8 @@
         android:inputType="numberPassword"
         android:padding="10dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/btn_bg"
         android:backgroundTint="@color/selected"
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"

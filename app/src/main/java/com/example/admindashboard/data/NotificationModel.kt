@@ -8,4 +8,7 @@ data class NotificationModel(
     var time: String = "",
     val title: String = "",
     val img: String
-)
+) {
+    constructor() : this("", "", "", "","", "", "")
+
+}

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/anti_flash_white"
+    android:orientation="vertical"
     tools:context=".ui.UploadActivity">
 
     <LinearLayout
@@ -18,15 +18,16 @@
 
         <ImageView
             android:id="@+id/back"
-            android:src="@drawable/round_arrow_back_24"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/round_arrow_back_24" />
 
         <TextView
-            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins"
             android:id="@+id/appbarText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="@string/dashboard"
             android:textColor="@color/black"
             android:textSize="26sp"
@@ -35,113 +36,138 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:background="@drawable/dotted_bg"
-        android:padding="10dp"
-        android:paddingBottom="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:src="@drawable/baseline_cloud_upload_24"
-            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/dotted_bg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:paddingBottom="5dp">
 
-        <TextView
-            android:layout_marginTop="5dp"
-            android:drawablePadding="5dp"
-            android:drawableStart="@drawable/pdf_logo"
-            android:id="@+id/pdf_path"
+            <TextView
+                android:layout_marginVertical="8dp"
+                android:id="@+id/subjectName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_cloud_upload_24" />
+
+            <TextView
+                android:id="@+id/pdf_path"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginVertical="8dp"
+                android:layout_marginEnd="10dp"
+                android:drawableStart="@drawable/pdf_logo"
+                android:drawablePadding="5dp"
+                android:text="@string/new_book_pdf"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/publication"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:boxBackgroundColor="@color/white"
+            android:hint="@string/enter_publications_name"
+            android:maxLines="1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/black"
+            android:textColorHint="@color/hint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <EditText
+            android:id="@+id/exam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Exam"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint"
+            android:visibility="gone" />
+
+
+        <EditText
+            android:fontFamily="@font/poppins"
+            android:id="@+id/yearOfExam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Year of examination"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint"
+            android:visibility="gone" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/browseFile"
+            android:fontFamily="@font/poppins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/new_book_pdf"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_bg"
+            android:backgroundTint="@color/selected"
+            android:paddingHorizontal="20dp"
+            android:text="@string/browse_files" />
 
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_bg"
+            android:fontFamily="@font/poppins"
+            android:backgroundTint="@color/selected"
+            android:padding="5dp"
+
+            android:text="@string/upload" />
     </LinearLayout>
-
-    <EditText
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/publication"
-        android:textAlignment="center"
-        android:hint="@string/enter_publications_name"
-        android:background="@drawable/edit_text_bg"
-        android:textColorHint="@color/hint"
-        android:layout_width="match_parent"
-        android:padding="8dp"
-        android:layout_height="wrap_content"/>
-
-
-    <EditText
-        android:visibility="gone"
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/exam"
-        android:textAlignment="center"
-        android:hint="Exam"
-        android:background="@drawable/edit_text_bg"
-        android:textColorHint="@color/hint"
-        android:layout_width="match_parent"
-        android:padding="8dp"
-        android:layout_height="wrap_content"/>
-
-
-    <EditText
-        android:visibility="gone"
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/yearOfExam"
-        android:textAlignment="center"
-        android:hint="Year of examination"
-        android:background="@drawable/edit_text_bg"
-        android:textColorHint="@color/hint"
-        android:layout_width="match_parent"
-        android:padding="8dp"
-        android:layout_height="wrap_content"/>
-
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/selected"
-        android:id="@+id/browseFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:padding="5dp"
-        android:text="@string/browse_files" />
-
-
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/selected"
-        android:padding="5dp"
-        android:text="@string/upload" />
 
 
 </LinearLayout>

@@ -53,6 +53,8 @@ class UploadActivity : AppCompatActivity() {
     }
 
     private fun subscribeUi() {
+        binding!!.subjectName.text = subject
+
         when (from) {
             "pyq" -> {
                 binding!!.publication.hint = "Enter Examination"
@@ -63,7 +65,6 @@ class UploadActivity : AppCompatActivity() {
             else -> {
                 binding!!.publication.hint = getString(R.string.enter_publications_name)
                 binding!!.yearOfExam.visibility = View.GONE
-
                 binding!!.exam.visibility = View.GONE
             }
         }
@@ -80,7 +81,7 @@ class UploadActivity : AppCompatActivity() {
         }
 
         binding!!.submit.setOnClickListener {
-            publication = binding!!.publication.text.toString()
+            publication = binding!!.publication.editText!!.text.toString()
             exam = binding!!.exam.text.toString()
             yearOfExam = binding!!.yearOfExam.text.toString()
 
@@ -325,4 +326,5 @@ class UploadActivity : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
+
 }// end of class

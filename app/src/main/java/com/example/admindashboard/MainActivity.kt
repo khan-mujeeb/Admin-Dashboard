@@ -15,7 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
+        subscribeOnClickEvents()
+    }
 
+    private fun subscribeOnClickEvents() {
         // go to add books
         binding!!.books.setOnClickListener {
             val intent = Intent(this, AddBooks::class.java)
@@ -36,14 +39,6 @@ class MainActivity : AppCompatActivity() {
             intent2.putExtra("from", "pyq")
             startActivity(intent2)
         }
-
-        // go to control panel
-        binding!!.controlPanel.setOnClickListener {
-            val intent2 = Intent(this, ControlPanelActivity::class.java)
-            intent2.putExtra("heading", "Control Panel")
-            startActivity(intent2)
-        }
-
     }
 
 }
