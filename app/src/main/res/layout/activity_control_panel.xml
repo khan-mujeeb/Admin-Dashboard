@@ -11,11 +11,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="#F5F5F5"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="15dp">
 
         <ImageView
             android:id="@+id/back"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins"
-            android:text="@string/dashboard"
+            android:text="Manage"
             android:textColor="@color/black"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -37,7 +37,7 @@
     </LinearLayout>
     <TextView
         android:id="@+id/dir"
-        android:paddingStart="10dp"
+        android:paddingStart="15dp"
         android:textSize="18sp"
         android:paddingBottom="10dp"
         android:background="#F5F5F5"

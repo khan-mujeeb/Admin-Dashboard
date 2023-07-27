@@ -1,10 +1,13 @@
 package com.example.admindashboard.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.admindashboard.MainActivity
 import com.example.admindashboard.R
 import com.example.admindashboard.adapter.NotificationAdapter
 import com.example.admindashboard.data.NotificationModel
@@ -24,6 +27,17 @@ class ManageNotificationsActivity : AppCompatActivity() {
         binding = ActivityManageNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        subscribeUi()
+        subscribeOnClickEvents()
+    }
+
+    private fun subscribeOnClickEvents() {
+        binding.back.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
+
+    private fun subscribeUi() {
         startLoadingScreen()
         notificationRef.addValueEventListener(object : ValueEventListener {
             val notificationlist = mutableListOf<NotificationModel>()
@@ -49,6 +63,7 @@ class ManageNotificationsActivity : AppCompatActivity() {
 
         })
     }
+
     @SuppressLint("InflateParams")
     private fun startLoadingScreen() {
         val builder = AlertDialog.Builder(this)

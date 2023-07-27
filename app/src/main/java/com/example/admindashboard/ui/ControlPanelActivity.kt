@@ -45,12 +45,11 @@ class ControlPanelActivity : AppCompatActivity() {
         variableInit()
         startLoadingScreen()
         subscribeUi()
-
         subscribeOnClickEvent()
     }
 
     fun subscribeUi() {
-        binding!!.appbarText.text = heading
+        binding!!.appbarText.text = "Manage"
         binding!!.dir.text = "sem ${semesterNameToNumber(semester)} / $subject"
 
         val ref = if (from == "pyq") pyqRef else bookRef
