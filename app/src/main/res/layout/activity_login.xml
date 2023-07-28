@@ -25,10 +25,10 @@
 
 
     <app.rive.runtime.kotlin.RiveAnimationView
+        android:id="@+id/loginCharacter"
         android:paddingHorizontal="24dp"
-        android:layout_width="300dp"
-        android:layout_height="180dp"
-        android:minWidth="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:riveResource="@raw/login_screen_character" />
 
     <com.google.android.material.card.MaterialCardView
@@ -45,6 +45,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins"
                 android:layout_width="match_parent"
@@ -85,7 +86,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="@string/passwordHint"
-                android:inputType="numberPassword"
                 android:padding="10dp" />
 
             <androidx.appcompat.widget.AppCompatButton
